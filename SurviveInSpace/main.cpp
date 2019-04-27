@@ -1,8 +1,8 @@
 #include <iostream>
+#include "Game.h"
 
 int main()
 {
-	std::cout << "Hello world!" << std::endl;
-	system("pause");
+	sis::Game game;
 	return 0;
 }
