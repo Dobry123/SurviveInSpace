@@ -2,6 +2,7 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include <sstream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "AssetManager.h"
@@ -13,14 +14,16 @@ namespace sis
 	class Menu
 	{
 	public:
-		Menu(sf::RenderWindow *window, AssetManager *assets);
+		Menu(sf::RenderWindow *window, AssetManager *assets, Scoreboard *scoreboard);
 		~Menu();
 		int processMenu();
 
 	private:
 		sf::RenderWindow *window_;
 		AssetManager *assets_;
+		Scoreboard *scoreboard_;
 		sf::Sprite backgroundSprite_;
+		sf::Sprite scoreboard_backgroundSprite_;
 		float delayTime_;
 		sf::Clock clock_;
 		std::string menuTexts_[4];
@@ -31,6 +34,7 @@ namespace sis
 
 		void handleInput();
 		void draw();
+		void showScoreboard();
 	};
 }
 

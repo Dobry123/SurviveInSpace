@@ -88,4 +88,10 @@ namespace sis
 			this->list_[pos].name = name;
 		}
 	}
+
+	void Scoreboard::getRecord(int place, std::string &n, int &s)
+	{
+		n = list_[place].name;
+		s = list_[place].score;
+	}
 }

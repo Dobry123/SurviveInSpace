@@ -6,5 +6,8 @@
 #define MENU_BACKGROUND_FILEPATH "Data/menu_background.jpg"
 #define MENU_BACKGROUND "menu_background"
 
+#define SCOREBOARD_BACKGROUND_FILEPATH "Data/scoreboard_background.jpg"
+#define SCOREBOARD_BACKGROUND "scoreboard_background"
+
 #define MENU_FONT_FILEPATH "Data/DISTGRG_.ttf"
 #define MENU_FONT "menu_font"

@@ -6,9 +6,9 @@ namespace sis
 	{
 		this->assets_ = new AssetManager;
 		this->scoreboard_ = new Scoreboard;
-		this->window_ = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Survive in space");
+		this->window_ = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Survive in space", sf::Style::Close);
 		loadAssets();
-		this->menu_ = new Menu(window_, assets_);
+		this->menu_ = new Menu(window_, assets_, scoreboard_);
 
 		loop();
 	}
@@ -22,6 +22,7 @@ namespace sis
 	void Game::loadAssets()
 	{
 		assets_->LoadTexture(MENU_BACKGROUND, MENU_BACKGROUND_FILEPATH);
+		assets_->LoadTexture(SCOREBOARD_BACKGROUND, SCOREBOARD_BACKGROUND_FILEPATH);
 		assets_->LoadFont(MENU_FONT, MENU_FONT_FILEPATH);
 	}
 
@@ -30,5 +31,7 @@ namespace sis
 		int result = menu_->processMenu();
 		if (result == 3)
 			window_->close();
+		else
+			window_->close(); //temp
 	}
 }

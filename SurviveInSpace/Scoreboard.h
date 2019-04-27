@@ -21,6 +21,7 @@ namespace sis
 		Scoreboard();
 		~Scoreboard();
 		void addNewScore(std::string name, int score);
+		void getRecord(int place, std::string &n, int &s);
 
 	private:
 		Record list_[10];
