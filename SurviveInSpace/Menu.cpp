@@ -80,7 +80,7 @@ namespace sis
 		window_->display();
 	}
 
-	int Menu::processMenu()
+	int Menu::process()
 	{
 		while (!choice_selected_)
 		{
@@ -121,6 +121,6 @@ namespace sis
 
 		window_->display();
 		while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {}
-		processMenu();
+		process();
 	}
 }

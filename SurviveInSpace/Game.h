@@ -14,14 +14,16 @@ namespace sis
 	public:
 		Game();
 		~Game();
+		void run();
 
 	private:
 		sf::RenderWindow *window_;
+		sf::Clock clock_;
+		float frameRate_;
 		AssetManager *assets_;
 		Scoreboard *scoreboard_;
 		Menu *menu_;
 		void loadAssets();
-		void loop();
 	};
 }
 

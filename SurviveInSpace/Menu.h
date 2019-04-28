@@ -16,7 +16,7 @@ namespace sis
 	public:
 		Menu(sf::RenderWindow *window, AssetManager *assets, Scoreboard *scoreboard);
 		~Menu();
-		int processMenu();
+		int process();
 
 	private:
 		sf::RenderWindow *window_;
