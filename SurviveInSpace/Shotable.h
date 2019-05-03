@@ -12,10 +12,16 @@ namespace sis
 	public:
 		virtual void update(float dt) = 0;
 		virtual void draw() = 0;
+		std::vector<Shot *> getShots() { return createdShots_; }
+		bool ifShot() { return did_shot_; }
 	protected:
-		//virtual void shot() = 0;
+		virtual void shot() = 0;
 		virtual void move(float dt) = 0;
-		int shot_amount_;
+		std::vector<Shot *> createdShots_;
+		bool did_shot_;
+		ShotStats shot_stats_;
+		sf::Clock clock_;
+		float last_shot_time_;
 	};
 }
 

@@ -18,7 +18,7 @@ namespace sis
 	{
 	public:
 		Shot(sf::RenderWindow *window, AssetManager *assets, Pose pose, ShotStats stats, int type = 0);
-		~Shot();
+		~Shot() { };
 		void draw();
 		void update(float dt);
 		bool isDead();

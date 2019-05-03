@@ -14,8 +14,16 @@ namespace sis
 		sprite_.setTexture(assets_->getTexture(SPACESHIP));
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 		sprite_.setRotation(pose_.rotation);
-		sprite_.setScale(sf::Vector2f(2, 2));
 		sprite_.setOrigin(sf::Vector2f(19, 0));
+		sprite_.setScale(sf::Vector2f(2, 2));
+		
+
+		shot_stats_.hz = 0.01f;
+		shot_stats_.power = 50;
+		shot_stats_.range = 500;
+		shot_stats_.speed = 500;
+
+		last_shot_time_ = clock_.getElapsedTime().asSeconds();
 	}
 
 	void SpaceShip::draw()
@@ -25,6 +33,12 @@ namespace sis
 
 	void SpaceShip::update(float dt)
 	{
+		if (did_shot_)
+		{
+			createdShots_.clear();
+			did_shot_ = false;
+		}
+		shot();
 		move(dt);
 	}
 
@@ -75,6 +89,19 @@ namespace sis
 				pose_.rotation = atan(argArctg) * 180 / PI - 90;
 			else
 				pose_.rotation = atan(argArctg) * 180 / PI + 90;
+
 			sprite_.setRotation(pose_.rotation);
+	}
+
+	void SpaceShip::shot()
+	{
+		float time_lasts = clock_.getElapsedTime().asSeconds() - last_shot_time_;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && time_lasts > shot_stats_.hz)
+		{
+			did_shot_ = true;
+			Shot *shot = new Shot(window_, assets_, pose_, shot_stats_, 0);
+			createdShots_.push_back(shot);
+			last_shot_time_ = clock_.getElapsedTime().asSeconds();
+		}
 	}
 }

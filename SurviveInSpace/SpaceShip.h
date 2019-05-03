@@ -14,7 +14,7 @@ namespace sis
 		void update(float dt);
 		void draw();
 	private:
-		//void shot();
+		void shot();
 		void move(float dt);
 	};
 }
