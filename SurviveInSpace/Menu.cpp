@@ -5,7 +5,7 @@ namespace sis
 	Menu::Menu(sf::RenderWindow *window, AssetManager *assets, Scoreboard *scoreboard) :
 		current_choice_(0),
 		menuTextsSize_(sizeof(menuTexts_) / sizeof(*menuTexts_)),
-		delayTime_(0.2),
+		delayTime_(0.15),
 		choice_selected_(false)
 	{
 		menuTexts_[0] = "New Game";

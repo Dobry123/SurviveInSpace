@@ -13,18 +13,28 @@ namespace sis
 		std::uniform_int_distribution<int> intDistWidth(1, WINDOW_WIDTH);
 		std::uniform_real_distribution<float> floatDist0_1(0, 1);
 
-		rotation_ = 360 * floatDist0_1(rng);
-		speed_ = 10 * floatDist0_1(rng);
-		animation_speed_ = speed_ / 10;
+		pose_.rotation = 360 * floatDist0_1(rng);
+		speed_ = 120 + 50 * floatDist0_1(rng);
+		animation_speed_ = speed_ / 300;
 
 		if (intDistWidth(rng) % 2 == 0)
+		{
 			sprite_.setTexture(assets_->getTexture(ASTEROID));
+			sprite_.setRotation(pose_.rotation - 135);
+		}
 		else
+		{
 			sprite_.setTexture(assets_->getTexture(ASTEROID_SMALL));
+			sprite_.setRotation(pose_.rotation + 135);
+		}
 
-		x_ = intDistWidth(rng);
-		y_ = 0;
-		sprite_.setPosition(sf::Vector2f(x_, y_));
+		pose_.x = intDistWidth(rng);
+		pose_.y = 0;
+		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
+		
+
+		dx_ = cos(pose_.rotation * PI / 180);
+		dy_ = -sin(pose_.rotation * PI / 180);
 	}
 
 	void Asteroid::update(float dt)
@@ -35,31 +45,31 @@ namespace sis
 
 	void Asteroid::move(float dt)
 	{
-		float dx = cos(rotation_ * PI / 180) * speed_;
-		float dy = -sin(rotation_ * PI / 180) * speed_;
-		x_ += dx;
-		y_ += dy;
+		float dx = dx_ * speed_ * dt;
+		float dy = dy_ * speed_ * dt;
+		pose_.x += dx;
+		pose_.y += dy;
 		sprite_.move(sf::Vector2f(dx, dy));
 
-		if (x_ > WINDOW_WIDTH + 30)
+		if (pose_.x > WINDOW_WIDTH + 30)
 		{
-			sprite_.setPosition(sf::Vector2f(0, y_));
-			x_ = -30;
+			sprite_.setPosition(sf::Vector2f(0, pose_.y));
+			pose_.x = -30;
 		}
-		if (x_ < -30)
+		if (pose_.x < -30)
 		{
-			sprite_.setPosition(sf::Vector2f(WINDOW_WIDTH, y_));
-			x_ = WINDOW_WIDTH + 30;
+			sprite_.setPosition(sf::Vector2f(WINDOW_WIDTH, pose_.y));
+			pose_.x = WINDOW_WIDTH + 30;
 		}
-		if (y_ < -30)
+		if (pose_.y < -30)
 		{
-			sprite_.setPosition(sf::Vector2f(x_, WINDOW_HEIGHT));
-			y_ = WINDOW_HEIGHT + 30;
+			sprite_.setPosition(sf::Vector2f(pose_.x, WINDOW_HEIGHT));
+			pose_.y = WINDOW_HEIGHT + 30;
 		}
-		if (y_ > WINDOW_HEIGHT + 30)
+		if (pose_.y > WINDOW_HEIGHT + 30)
 		{
-			sprite_.setPosition(sf::Vector2f(x_, 0));
-			y_ = -30;
+			sprite_.setPosition(sf::Vector2f(pose_.x, 0));
+			pose_.y = -30;
 		}
 	}
 

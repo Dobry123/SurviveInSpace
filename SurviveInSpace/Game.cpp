@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Asteroid.h"
+#include "SpaceShip.h"
 
 namespace sis
 {
@@ -25,6 +26,7 @@ namespace sis
 		assets_->LoadTexture(SCOREBOARD_BACKGROUND, SCOREBOARD_BACKGROUND_FILEPATH);
 		assets_->LoadTexture(ASTEROID_SMALL, ASTEROID_SMALL_FILEPATH);
 		assets_->LoadTexture(ASTEROID, ASTEROID_FILEPATH);
+		assets_->LoadTexture(SPACESHIP, SPACESHIP_FILEPATH);
 		assets_->LoadFont(MENU_FONT, MENU_FONT_FILEPATH);
 
 	}
@@ -51,7 +53,6 @@ namespace sis
 				while (accumulator >= frameRate_)
 				{
 					// update
-
 					accumulator -= frameRate_;
 				}
 

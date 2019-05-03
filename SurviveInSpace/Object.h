@@ -10,16 +10,22 @@
 
 namespace sis
 {
+	struct Pose
+	{
+		float x, y;
+		float rotation;
+	};
+
 	class Object
 	{
 	public:
 		virtual void update(float dt) = 0;
 		virtual void draw() = 0;
 	protected:
-		float x_, y_;
-		float rotation_;
+		Pose pose_;
 		float speed_;
 		int hp_;
+		float dx_, dy_;
 		sf::RenderWindow *window_;
 		sf::Sprite sprite_;
 		AssetManager *assets_;

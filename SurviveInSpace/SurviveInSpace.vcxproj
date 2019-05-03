@@ -141,6 +141,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
+    <ClCompile Include="Shot.cpp" />
+    <ClCompile Include="SpaceShip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
@@ -150,6 +152,9 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Scoreboard.h" />
+    <ClInclude Include="Shot.h" />
+    <ClInclude Include="Shotable.h" />
+    <ClInclude Include="SpaceShip.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

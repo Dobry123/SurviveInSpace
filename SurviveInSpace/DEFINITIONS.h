@@ -18,5 +18,11 @@
 #define ASTEROID_SMALL_FILEPATH "Data/rock_small.png"
 #define ASTEROID_SMALL "asteroid_small_tex"
 
+#define SPACESHIP_FILEPATH "Data/spaceShip.png"
+#define SPACESHIP "spaceship_tex"
+
+#define SHOT_TYPE_0_FILEPATH "Date/shot_type_0.png"
+#define SHOT_TYPE_0 "shot_type_0"
+
 #define MENU_FONT_FILEPATH "Data/DISTGRG_.ttf"
 #define MENU_FONT "menu_font"
