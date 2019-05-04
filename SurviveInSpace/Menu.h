@@ -17,6 +17,7 @@ namespace sis
 		Menu(sf::RenderWindow *window, AssetManager *assets, Scoreboard *scoreboard);
 		~Menu();
 		int process();
+		std::string inputNameScreen();
 
 	private:
 		sf::RenderWindow *window_;

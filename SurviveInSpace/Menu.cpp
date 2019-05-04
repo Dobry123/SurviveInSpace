@@ -123,4 +123,54 @@ namespace sis
 		while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {}
 		process();
 	}
+
+	std::string Menu::inputNameScreen()
+	{
+		window_->clear();
+		window_->draw(backgroundSprite_);
+		text_.setString("Your name:");
+		text_.setPosition(sf::Vector2f(WINDOW_WIDTH / 10, WINDOW_HEIGHT / 10));
+		text_.setFillColor(sf::Color::White);
+		window_->draw(text_);
+		window_->display();
+
+		std::string str = "";
+		sf::Event event;
+		while (true)
+		{
+			if (window_->pollEvent(event))
+			{
+				if (event.type == sf::Event::TextEntered)
+				{
+					// Handle ASCII characters only
+					if (event.text.unicode < 128)
+					{
+						if (event.text.unicode == 8 && !str.empty())
+							str.pop_back();
+						else
+							str += static_cast<char>(event.text.unicode);
+						text_.setString(str);
+						text_.setPosition(sf::Vector2f(WINDOW_WIDTH / 10, WINDOW_HEIGHT / 7));
+						text_.setFillColor(sf::Color::Yellow);
+
+						window_->clear();
+						window_->draw(backgroundSprite_);
+						window_->draw(text_);
+
+						text_.setString("Your name:");
+						text_.setPosition(sf::Vector2f(WINDOW_WIDTH / 10, WINDOW_HEIGHT / 10));
+						text_.setFillColor(sf::Color::White);
+						window_->draw(text_);
+
+						window_->display();
+					}
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+					return str;
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+					return "";
+			}
+		}
+	}
 }

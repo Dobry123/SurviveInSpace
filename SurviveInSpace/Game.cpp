@@ -39,6 +39,10 @@ namespace sis
 			window_->close();
 		else
 		{
+			player_->setName(menu_->inputNameScreen());
+			if (player_->getName() == "")
+				run();
+
 			//Game loop
 			object_manager_ = new ObjectManager(window_, assets_);
 			float newTime, currentTime, frameTime;
