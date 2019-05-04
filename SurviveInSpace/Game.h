@@ -7,6 +7,8 @@
 #include "Menu.h"
 #include "ObjectManager.h"
 #include "DEFINITIONS.h"
+#include "Player.h"
+#include "HUD.h"
 
 namespace sis
 {
@@ -25,6 +27,8 @@ namespace sis
 		Scoreboard *scoreboard_;
 		ObjectManager *object_manager_;
 		Menu *menu_;
+		Player *player_;
+		HUD *hud_;
 		void loadAssets();
 	};
 }

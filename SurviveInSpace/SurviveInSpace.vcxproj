@@ -138,9 +138,11 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Shot.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
@@ -150,9 +152,11 @@
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Shotable.h" />

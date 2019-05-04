@@ -10,6 +10,8 @@ namespace sis
 		this->window_ = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Survive in space", sf::Style::Close);
 		loadAssets();
 		this->menu_ = new Menu(window_, assets_, scoreboard_);
+		this->player_ = new Player();
+		this->hud_ = new HUD(window_, assets_, player_);
 	}
 
 	Game::~Game()
@@ -60,6 +62,7 @@ namespace sis
 				// draw
 				window_->clear();
 				object_manager_->draw();
+				hud_->draw(5);
 				window_->display();
 			}
 			window_->close();
