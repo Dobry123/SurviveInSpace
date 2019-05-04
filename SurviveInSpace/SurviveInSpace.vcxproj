@@ -140,6 +140,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Shot.cpp" />
     <ClCompile Include="SpaceShip.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Shotable.h" />

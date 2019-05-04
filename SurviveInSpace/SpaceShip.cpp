@@ -14,11 +14,10 @@ namespace sis
 		sprite_.setTexture(assets_->getTexture(SPACESHIP));
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 		sprite_.setRotation(pose_.rotation);
-		sprite_.setOrigin(sf::Vector2f(19, 0));
+		sprite_.setOrigin(sf::Vector2f(19, 18));
 		sprite_.setScale(sf::Vector2f(2, 2));
 		
-
-		shot_stats_.hz = 0.01f;
+		shot_stats_.hz = 0.05f;
 		shot_stats_.power = 50;
 		shot_stats_.range = 500;
 		shot_stats_.speed = 500;
@@ -99,7 +98,10 @@ namespace sis
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && time_lasts > shot_stats_.hz)
 		{
 			did_shot_ = true;
-			Shot *shot = new Shot(window_, assets_, pose_, shot_stats_, 0);
+			Pose shot_pose = pose_;
+			shot_pose.x += sin(pose_.rotation * PI / 180) * 35;
+			shot_pose.y += -cos(pose_.rotation * PI / 180) * 35;
+			Shot *shot = new Shot(window_, assets_, shot_pose, shot_stats_, 0);
 			createdShots_.push_back(shot);
 			last_shot_time_ = clock_.getElapsedTime().asSeconds();
 		}

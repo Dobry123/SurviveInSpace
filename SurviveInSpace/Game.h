@@ -5,6 +5,7 @@
 #include "AssetManager.h"
 #include "Scoreboard.h"
 #include "Menu.h"
+#include "ObjectManager.h"
 #include "DEFINITIONS.h"
 
 namespace sis
@@ -22,6 +23,7 @@ namespace sis
 		float frameRate_;
 		AssetManager *assets_;
 		Scoreboard *scoreboard_;
+		ObjectManager *object_manager_;
 		Menu *menu_;
 		void loadAssets();
 	};

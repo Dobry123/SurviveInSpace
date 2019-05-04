@@ -1,7 +1,4 @@
 #include "Game.h"
-#include "Asteroid.h"
-#include "SpaceShip.h"
-#include "Shot.h"
 
 namespace sis
 {
@@ -41,9 +38,7 @@ namespace sis
 		else
 		{
 			//Game loop
-			Asteroid a(window_, assets_);
-			SpaceShip s(window_, assets_);
-			std::vector<Shot *> shots;
+			object_manager_ = new ObjectManager(window_, assets_);
 			float newTime, currentTime, frameTime;
 			float accumulator = 0.0f;
 			currentTime = clock_.getElapsedTime().asSeconds();
@@ -58,33 +53,13 @@ namespace sis
 				while (accumulator >= frameRate_)
 				{
 					// update
-					a.update(frameRate_);
-					s.update(frameRate_);
-					if (s.ifShot())
-					{
-						shots.push_back(s.getShots()[0]);
-					}
-					for (int i = 0; i < shots.size(); ++i)
-					{
-						if (shots[i]->isDead())
-						{
-							delete shots[i];
-							shots.erase(shots.begin() + i);
-						}
-						else
-							shots[i]->update(frameRate_);
-					}
+					object_manager_->process(frameRate_);
 					accumulator -= frameRate_;
 				}
 
 				// draw
 				window_->clear();
-				a.draw();
-				s.draw();
-				for (int i = 0; i < shots.size(); ++i)
-				{
-					shots[i]->draw();
-				}
+				object_manager_->draw();
 				window_->display();
 			}
 			window_->close();
