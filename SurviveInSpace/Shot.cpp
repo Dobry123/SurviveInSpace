@@ -19,6 +19,7 @@ namespace sis
 		case 0:
 			sprite_.setTexture(assets_->getTexture(SHOT_TYPE_0));
 			sprite_.setOrigin(sf::Vector2f(10, 12));
+			r_ = 4;
 		}
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 		sprite_.setRotation(pose_.rotation);
@@ -52,5 +53,10 @@ namespace sis
 	void Shot::draw()
 	{
 		window_->draw(sprite_);
+	}
+
+	int Shot::getPower()
+	{
+		return stats_.power;
 	}
 }

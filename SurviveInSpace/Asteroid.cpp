@@ -13,19 +13,24 @@ namespace sis
 		std::uniform_int_distribution<int> intDistWidth(1, WINDOW_WIDTH);
 		std::uniform_real_distribution<float> floatDist0_1(0, 1);
 
+		hp_ = 100;
 		pose_.rotation = 360 * floatDist0_1(rng);
 		speed_ = 120 + 50 * floatDist0_1(rng);
 		animation_speed_ = speed_ / 300;
 
 		if (intDistWidth(rng) % 2 == 0)
 		{
+			sprite_.setOrigin(sf::Vector2f(32, 32));
 			sprite_.setTexture(assets_->getTexture(ASTEROID));
 			sprite_.setRotation(pose_.rotation - 135);
+			r_ = 25;
 		}
 		else
 		{
+			sprite_.setOrigin(sf::Vector2f(32, 32));
 			sprite_.setTexture(assets_->getTexture(ASTEROID_SMALL));
 			sprite_.setRotation(pose_.rotation + 135);
+			r_ = 16;
 		}
 
 		pose_.x = intDistWidth(rng);

@@ -6,19 +6,21 @@
 #include "Asteroid.h"
 #include "SpaceShip.h"
 #include "Shot.h"
+#include "Player.h"
 
 namespace sis
 {
 	class ObjectManager
 	{
 	public:
-		ObjectManager(sf::RenderWindow *window, AssetManager *assets);
+		ObjectManager(sf::RenderWindow *window, AssetManager *assets, Player *player);
 		~ObjectManager();
 		void draw();
 		void process(float dt);
 	private:
 		sf::RenderWindow *window_;
 		AssetManager *assets_;
+		Player *player_;
 		std::vector<Shot *> spaceship_shots_;
 		std::vector<Shot *> enemy_shots_;
 		std::vector<Asteroid *> asteroids_;

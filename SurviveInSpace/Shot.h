@@ -22,7 +22,7 @@ namespace sis
 		void draw();
 		void update(float dt);
 		bool isDead();
-
+		int getPower();
 	private:
 		ShotStats stats_;
 		void move(float dt);

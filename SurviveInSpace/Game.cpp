@@ -44,7 +44,7 @@ namespace sis
 				run();
 
 			//Game loop
-			object_manager_ = new ObjectManager(window_, assets_);
+			object_manager_ = new ObjectManager(window_, assets_, player_);
 			float newTime, currentTime, frameTime;
 			float accumulator = 0.0f;
 			currentTime = clock_.getElapsedTime().asSeconds();
