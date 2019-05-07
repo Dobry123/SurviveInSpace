@@ -1,5 +1,4 @@
 #include "ObjectManager.h"
-#include <iostream>
 
 namespace sis
 {
@@ -17,12 +16,20 @@ namespace sis
 		delete spaceship_;
 	}
 
-	void ObjectManager::process(float dt)
+	int ObjectManager::process(float dt)
 	{
-		checkCollisions();
+		if (player_->getLifes() > 0)
+		{
+			checkCollisions();
 
-		// update spaceship
-		spaceship_->update(dt);
+			// update spaceship
+			spaceship_->update(dt);
+		}
+		else if (explosions_.empty())
+		{
+			clearObjects();
+			return -1;
+		}
 
 		processShots(dt);
 
@@ -53,11 +60,13 @@ namespace sis
 			else
 				explosions_[i]->update(dt);
 		}
+		return 0;
 	}
 
 	void ObjectManager::draw()
 	{
-		spaceship_->draw();
+		if(player_->getLifes() > 0)
+			spaceship_->draw();
 
 		for (int i = 0; i < asteroids_.size(); ++i)
 		{
@@ -90,7 +99,7 @@ namespace sis
 			{
 				delete spaceship_shots_[i];
 				spaceship_shots_.erase(spaceship_shots_.begin() + i);
-				if (i > 0)
+				if (i > -1)
 					--i;
 			}
 			else
@@ -114,7 +123,7 @@ namespace sis
 					asteroids_[j]->hit(spaceship_shots_[i]->getPower());
 					delete spaceship_shots_[i];
 					spaceship_shots_.erase(spaceship_shots_.begin() + i);
-					if (i > 0)
+					if (i > -1)
 						--i;
 					if (asteroids_[j]->getHp() <= 0)
 					{
@@ -122,7 +131,7 @@ namespace sis
 
 						delete asteroids_[j];
 						asteroids_.erase(asteroids_.begin() + j);
-						if (j > 0)
+						if (j > -1)
 							--j;
 
 						player_->addScore(10);
@@ -131,7 +140,40 @@ namespace sis
 					break;
 				}
 			}
+		}
 
+		// check collsion spaceship and asteroids
+		for (int i = 0; i < asteroids_.size(); ++i)
+		{
+			float d = std::sqrtf((asteroids_[i]->getPose().x - spaceship_->getPose().x)
+				* (asteroids_[i]->getPose().x - spaceship_->getPose().x)
+				+ (asteroids_[i]->getPose().y - spaceship_->getPose().y)
+				* (asteroids_[i]->getPose().y - spaceship_->getPose().y));
+
+			if (d < asteroids_[i]->getR() + spaceship_->getR())
+			{
+				explosions_.push_back(new Explosion(window_, assets_, spaceship_->getPose()));
+				player_->minusLife();
+			}
+		}
+	}
+	
+	void ObjectManager::clearObjects()
+	{
+		for (int i = 0; i < asteroids_.size(); ++i)
+		{
+			delete asteroids_[i];
+			asteroids_.erase(asteroids_.begin() + i);
+			if (i > -1)
+				--i;
+		}
+
+		for (int i = 0; i < spaceship_shots_.size(); ++i)
+		{
+			delete spaceship_shots_[i];
+			spaceship_shots_.erase(spaceship_shots_.begin() + i);
+			if (i > -1)
+				--i;
 		}
 	}
 }

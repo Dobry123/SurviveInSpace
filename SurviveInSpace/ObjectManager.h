@@ -17,7 +17,7 @@ namespace sis
 		ObjectManager(sf::RenderWindow *window, AssetManager *assets, Player *player);
 		~ObjectManager();
 		void draw();
-		void process(float dt);
+		int process(float dt);
 	private:
 		sf::RenderWindow *window_;
 		AssetManager *assets_;
@@ -30,6 +30,7 @@ namespace sis
 		SpaceShip *spaceship_;
 		void checkCollisions();
 		void processShots(float dt);
+		void clearObjects();
 	};
 }
 

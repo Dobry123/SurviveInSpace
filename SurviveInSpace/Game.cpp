@@ -3,7 +3,8 @@
 namespace sis
 {
 	Game::Game():
-		frameRate_(1.0f / FRAME_RATE)
+		frameRate_(1.0f / FRAME_RATE),
+		state_(0)
 	{
 		this->assets_ = new AssetManager;
 		this->scoreboard_ = new Scoreboard;
@@ -60,7 +61,7 @@ namespace sis
 				while (accumulator >= frameRate_)
 				{
 					// update
-					object_manager_->process(frameRate_);
+					state_ = object_manager_->process(frameRate_);
 					accumulator -= frameRate_;
 				}
 
@@ -69,6 +70,9 @@ namespace sis
 				object_manager_->draw();
 				hud_->draw(5);
 				window_->display();
+
+				if (state_ == -1)
+					break;
 			}
 			window_->close();
 		}

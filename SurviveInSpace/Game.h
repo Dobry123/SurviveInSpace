@@ -29,6 +29,7 @@ namespace sis
 		Menu *menu_;
 		Player *player_;
 		HUD *hud_;
+		int state_;
 		void loadAssets();
 	};
 }

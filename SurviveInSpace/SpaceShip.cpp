@@ -16,6 +16,7 @@ namespace sis
 		sprite_.setRotation(pose_.rotation);
 		sprite_.setOrigin(sf::Vector2f(19, 18));
 		sprite_.setScale(sf::Vector2f(2, 2));
+		r_ = 15 * sprite_.getScale().x;
 		
 		shot_stats_.hz = 0.15f;
 		shot_stats_.power = 50;
