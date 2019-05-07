@@ -39,6 +39,20 @@ namespace sis
 		{
 			asteroids_[i]->update(dt);
 		}
+
+		// update explosions
+		for (int i = 0; i < explosions_.size(); ++i)
+		{
+			if (explosions_[i]->isEnd())
+			{
+				delete explosions_[i];
+				explosions_.erase(explosions_.begin() + i);
+				if (i > 0)
+					--i;
+			}
+			else
+				explosions_[i]->update(dt);
+		}
 	}
 
 	void ObjectManager::draw()
@@ -53,6 +67,11 @@ namespace sis
 		for (int i = 0; i < spaceship_shots_.size(); ++i)
 		{
 			spaceship_shots_[i]->draw();
+		}
+
+		for (int i = 0; i < explosions_.size(); ++i)
+		{
+			explosions_[i]->draw();
 		}
 	}
 
@@ -99,6 +118,8 @@ namespace sis
 						--i;
 					if (asteroids_[j]->getHp() <= 0)
 					{
+						explosions_.push_back(new Explosion(window_, assets_, asteroids_[j]->getPose()));
+
 						delete asteroids_[j];
 						asteroids_.erase(asteroids_.begin() + j);
 						if (j > 0)

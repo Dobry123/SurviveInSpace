@@ -7,6 +7,7 @@
 #include "SpaceShip.h"
 #include "Shot.h"
 #include "Player.h"
+#include "Explosion.h"
 
 namespace sis
 {
@@ -25,6 +26,7 @@ namespace sis
 		std::vector<Shot *> enemy_shots_;
 		std::vector<Asteroid *> asteroids_;
 		std::vector<Shotable *> enemies_;
+		std::vector<Explosion *> explosions_;
 		SpaceShip *spaceship_;
 		void checkCollisions();
 		void processShots(float dt);

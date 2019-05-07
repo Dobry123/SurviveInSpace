@@ -33,7 +33,7 @@ namespace sis
 			float dy = dy_ * stats_.speed * dt;
 			pose_.x += dx;
 			pose_.y += dy;
-			sprite_.move(sf::Vector2f(dx, dy));
+			sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 			distance_ += sqrtf(dx * dx + dy * dy);
 		}
 		else

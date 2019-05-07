@@ -1,4 +1,5 @@
 #include "Asteroid.h"
+#include <iostream>
 
 namespace sis
 {
@@ -18,16 +19,17 @@ namespace sis
 		speed_ = 120 + 50 * floatDist0_1(rng);
 		animation_speed_ = speed_ / 300;
 
+		sprite_.setTextureRect(sf::IntRect(0, 0, 64, 64));
+		sprite_.setOrigin(sf::Vector2f(32, 32));
+
 		if (intDistWidth(rng) % 2 == 0)
 		{
-			sprite_.setOrigin(sf::Vector2f(32, 32));
 			sprite_.setTexture(assets_->getTexture(ASTEROID));
 			sprite_.setRotation(pose_.rotation - 135);
 			r_ = 25;
 		}
 		else
 		{
-			sprite_.setOrigin(sf::Vector2f(32, 32));
 			sprite_.setTexture(assets_->getTexture(ASTEROID_SMALL));
 			sprite_.setRotation(pose_.rotation + 135);
 			r_ = 16;
@@ -54,7 +56,7 @@ namespace sis
 		float dy = dy_ * speed_ * dt;
 		pose_.x += dx;
 		pose_.y += dy;
-		sprite_.move(sf::Vector2f(dx, dy));
+		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 
 		if (pose_.x > WINDOW_WIDTH + 30)
 		{

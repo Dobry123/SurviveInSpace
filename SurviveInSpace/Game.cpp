@@ -28,6 +28,7 @@ namespace sis
 		assets_->LoadTexture(ASTEROID, ASTEROID_FILEPATH);
 		assets_->LoadTexture(SPACESHIP, SPACESHIP_FILEPATH);
 		assets_->LoadTexture(SHOT_TYPE_0, SHOT_TYPE_0_FILEPATH);
+		assets_->LoadTexture(EXPLOSION_1, EXPLOSION_1_FILEPATH);
 		assets_->LoadFont(MENU_FONT, MENU_FONT_FILEPATH);
 
 	}

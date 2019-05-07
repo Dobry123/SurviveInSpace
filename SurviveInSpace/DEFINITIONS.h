@@ -21,6 +21,9 @@
 #define SPACESHIP_FILEPATH "Data/spaceShip.png"
 #define SPACESHIP "spaceship_tex"
 
+#define EXPLOSION_1_FILEPATH "Data/explosion1.png"
+#define EXPLOSION_1 "explosion1"
+
 #define SHOT_TYPE_0_FILEPATH "Data/shot_type_0.png"
 #define SHOT_TYPE_0 "shot_type_0"
 
