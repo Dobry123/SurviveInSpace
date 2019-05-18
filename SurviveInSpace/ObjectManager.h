@@ -8,6 +8,7 @@
 #include "Shot.h"
 #include "Player.h"
 #include "Explosion.h"
+#include "Level.h"
 
 namespace sis
 {
@@ -17,7 +18,7 @@ namespace sis
 		ObjectManager(sf::RenderWindow *window, AssetManager *assets, Player *player);
 		~ObjectManager();
 		void draw();
-		int process(float dt);
+		int process(float dt, LevelData lvl_data);
 	private:
 		sf::RenderWindow *window_;
 		AssetManager *assets_;

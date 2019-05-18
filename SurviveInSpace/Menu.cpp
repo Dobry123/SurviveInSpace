@@ -166,7 +166,13 @@ namespace sis
 					}
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+				{
+					// click delay
+					clock_.restart();
+					while((clock_.getElapsedTime().asSeconds() < 0.25)) { }
 					return str;
+				}
+					
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 					return "";

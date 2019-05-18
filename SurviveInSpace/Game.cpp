@@ -11,8 +11,6 @@ namespace sis
 		window_ = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Survive in space", sf::Style::Close);
 		loadAssets();
 		menu_ = new Menu(window_, assets_, scoreboard_);
-		player_ = new Player();
-		hud_ = new HUD(window_, assets_, player_);
 	}
 
 	Game::~Game()
@@ -45,40 +43,62 @@ namespace sis
 			window_->close();
 		else
 		{
-			player_->setName(menu_->inputNameScreen());
-			if (player_->getName() == "")
-				run();
-
-			//Game loop
+			level_ = new Level();
+			state_ = 0;
+			player_ = new Player();
 			object_manager_ = new ObjectManager(window_, assets_, player_);
-			float newTime, currentTime, frameTime;
-			float accumulator = 0.0f;
-			currentTime = clock_.getElapsedTime().asSeconds();
-			while (window_->isOpen() && !sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-			{
-				newTime = clock_.getElapsedTime().asSeconds();
-				frameTime = newTime - currentTime;
-
-				currentTime = newTime;
-				accumulator += frameTime;
-
-				while (accumulator >= frameRate_)
-				{
-					// update
-					state_ = object_manager_->process(frameRate_);
-					accumulator -= frameRate_;
-				}
-
-				// draw
-				window_->clear();
-				object_manager_->draw();
-				hud_->draw(5);
-				window_->display();
-
-				if (state_ == -1)
-					break;
-			}
-			window_->close();
+			hud_ = new HUD(window_, assets_, player_);
+			gameLoop();
 		}
+	}
+
+	void Game::gameLoop()
+	{
+		player_->setName(menu_->inputNameScreen());
+		std::cout << player_->getName() << std::endl;
+		if (player_->getName() == "")
+		{
+			run();
+			return;
+		}
+
+		//Game loop
+		float newTime, currentTime, frameTime;
+		float accumulator = 0.0f;
+		currentTime = clock_.getElapsedTime().asSeconds();
+		level_clock_.restart();
+		while (window_->isOpen() && !sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		{
+			newTime = clock_.getElapsedTime().asSeconds();
+			frameTime = newTime - currentTime;
+
+			currentTime = newTime;
+			accumulator += frameTime;
+
+			float time_left = level_->getLevelData().time - level_clock_.getElapsedTime().asSeconds();
+
+			while (accumulator >= frameRate_)
+			{
+				// update
+				state_ = object_manager_->process(frameRate_, level_->getLevelData());
+				accumulator -= frameRate_;
+			}
+
+			// draw
+			window_->clear();
+			object_manager_->draw();
+			hud_->draw(time_left);
+			window_->display();
+
+			if (time_left <= 0)
+			{
+				level_->levelUp();
+				level_clock_.restart();
+			}
+
+			if (state_ == -1)
+				break;
+		}
+		run();
 	}
 }

@@ -9,6 +9,7 @@
 #include "DEFINITIONS.h"
 #include "Player.h"
 #include "HUD.h"
+#include "Level.h"
 
 namespace sis
 {
@@ -22,6 +23,7 @@ namespace sis
 	private:
 		sf::RenderWindow *window_;
 		sf::Clock clock_;
+		sf::Clock level_clock_;
 		float frameRate_;
 		AssetManager *assets_;
 		Scoreboard *scoreboard_;
@@ -29,8 +31,10 @@ namespace sis
 		Menu *menu_;
 		Player *player_;
 		HUD *hud_;
+		Level *level_;
 		int state_;
 		void loadAssets();
+		void gameLoop();
 	};
 }
 

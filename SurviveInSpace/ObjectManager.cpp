@@ -16,7 +16,7 @@ namespace sis
 		delete spaceship_;
 	}
 
-	int ObjectManager::process(float dt)
+	int ObjectManager::process(float dt, LevelData lvl_data)
 	{
 		if (player_->getLifes() > 0)
 		{
@@ -34,9 +34,9 @@ namespace sis
 		processShots(dt);
 
 		// spawn asteroids
-		if (asteroids_.size() < 30)
+		if (asteroids_.size() < lvl_data.asteroid)
 		{
-			int spawn = 30 - asteroids_.size();
+			int spawn = lvl_data.asteroid - asteroids_.size();
 			for (int i = 0; i < spawn; ++i)
 				asteroids_.push_back(new Asteroid(window_, assets_));
 		}
