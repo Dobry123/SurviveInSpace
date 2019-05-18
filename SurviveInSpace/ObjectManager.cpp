@@ -34,9 +34,9 @@ namespace sis
 		processShots(dt);
 
 		// spawn asteroids
-		if (asteroids_.size() < 50)
+		if (asteroids_.size() < 30)
 		{
-			int spawn = 50 - asteroids_.size();
+			int spawn = 30 - asteroids_.size();
 			for (int i = 0; i < spawn; ++i)
 				asteroids_.push_back(new Asteroid(window_, assets_));
 		}

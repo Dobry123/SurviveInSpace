@@ -13,9 +13,9 @@ namespace sis
 		menuTexts_[2] = "Scoreboard";
 		menuTexts_[3] = "Exit";
 
-		this->window_ = window;
-		this->assets_ = assets;
-		this->scoreboard_ = scoreboard;
+		window_ = window;
+		assets_ = assets;
+		scoreboard_ = scoreboard;
 		backgroundSprite_.setTexture(assets_->getTexture(MENU_BACKGROUND));
 		scoreboard_backgroundSprite_.setTexture(assets_->getTexture(SCOREBOARD_BACKGROUND));
 		text_.setFont(assets_->getFont(MENU_FONT));

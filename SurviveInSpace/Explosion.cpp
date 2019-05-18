@@ -6,8 +6,8 @@ namespace sis
 		end_(false),
 		animation_counter_(0)
 	{
-		this->window_ = window;
-		this->assets_ = assets;
+		window_ = window;
+		assets_ = assets;
 		pose_ = pose;
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 		sprite_.setOrigin(sf::Vector2f(25, 25));
@@ -20,7 +20,7 @@ namespace sis
 
 	void Explosion::draw()
 	{
-		this->window_->draw(sprite_);
+		window_->draw(sprite_);
 	}
 
 	void Explosion::update(float dt)

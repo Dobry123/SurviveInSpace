@@ -6,8 +6,8 @@ namespace sis
 		toDestroy_(false),
 		distance_(0)
 	{
-		this->window_ = window;
-		this->assets_ = assets;
+		window_ = window;
+		assets_ = assets;
 		pose_ = pose;
 		
 		stats_ = stats;

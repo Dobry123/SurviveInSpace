@@ -6,8 +6,8 @@ namespace sis
 	Asteroid::Asteroid(sf::RenderWindow *window, AssetManager *assets):
 		animation_counter_(0)
 	{
-		this->window_ = window;
-		this->assets_ = assets;
+		window_ = window;
+		assets_ = assets;
 		
 		std::random_device dev;
 		std::mt19937 rng(dev());
@@ -46,8 +46,8 @@ namespace sis
 
 	void Asteroid::update(float dt)
 	{
-		this->move(dt);
-		this->animate();
+		move(dt);
+		animate();
 	}
 
 	void Asteroid::move(float dt)
@@ -82,7 +82,7 @@ namespace sis
 
 	void Asteroid::draw()
 	{
-		this->window_->draw(sprite_);
+		window_->draw(sprite_);
 	}
 
 	void Asteroid::animate()

@@ -6,8 +6,8 @@ namespace sis
 
 	AssetManager::~AssetManager()
 	{
-		this->textures_.clear();
-		this->fonts_.clear();
+		textures_.clear();
+		fonts_.clear();
 	}
 
 	bool AssetManager::LoadFont(std::string name, std::string name_path)
@@ -15,7 +15,7 @@ namespace sis
 		sf::Font font;
 		if (font.loadFromFile(name_path));
 		{
-			this->fonts_[name] = font;
+			fonts_[name] = font;
 			return true;
 		}
 		return false;
@@ -26,7 +26,7 @@ namespace sis
 		sf::Texture texture;
 		if (texture.loadFromFile(name_path))
 		{
-			this->textures_[name] = texture;
+			textures_[name] = texture;
 			return true;
 		}
 		return false;
@@ -34,11 +34,11 @@ namespace sis
 
 	sf::Font &AssetManager::getFont(std::string name)
 	{
-		return this->fonts_.at(name);
+		return fonts_.at(name);
 	}
 
 	sf::Texture &AssetManager::getTexture(std::string name)
 	{
-		return this->textures_.at(name);
+		return textures_.at(name);
 	}
 }

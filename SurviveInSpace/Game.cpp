@@ -6,19 +6,23 @@ namespace sis
 		frameRate_(1.0f / FRAME_RATE),
 		state_(0)
 	{
-		this->assets_ = new AssetManager;
-		this->scoreboard_ = new Scoreboard;
-		this->window_ = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Survive in space", sf::Style::Close);
+		assets_ = new AssetManager;
+		scoreboard_ = new Scoreboard;
+		window_ = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Survive in space", sf::Style::Close);
 		loadAssets();
-		this->menu_ = new Menu(window_, assets_, scoreboard_);
-		this->player_ = new Player();
-		this->hud_ = new HUD(window_, assets_, player_);
+		menu_ = new Menu(window_, assets_, scoreboard_);
+		player_ = new Player();
+		hud_ = new HUD(window_, assets_, player_);
 	}
 
 	Game::~Game()
 	{
-		delete this->assets_;
-		delete this->scoreboard_;
+		delete assets_;
+		delete scoreboard_;
+		delete window_;
+		delete menu_;
+		delete player_;
+		delete hud_;
 	}
 
 	void Game::loadAssets()

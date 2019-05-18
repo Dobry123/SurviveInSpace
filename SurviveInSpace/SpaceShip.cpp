@@ -4,8 +4,8 @@ namespace sis
 {
 	SpaceShip::SpaceShip(sf::RenderWindow *window, AssetManager *assets)
 	{
-		this->window_ = window;
-		this->assets_ = assets;
+		window_ = window;
+		assets_ = assets;
 		pose_.x = WINDOW_WIDTH / 2;
 		pose_.y = WINDOW_HEIGHT / 2;
 		pose_.rotation = 0;
@@ -18,7 +18,7 @@ namespace sis
 		sprite_.setScale(sf::Vector2f(2, 2));
 		r_ = 15 * sprite_.getScale().x;
 		
-		shot_stats_.hz = 0.15f;
+		shot_stats_.hz = 0.12f;
 		shot_stats_.power = 50;
 		shot_stats_.range = 500;
 		shot_stats_.speed = 500;
