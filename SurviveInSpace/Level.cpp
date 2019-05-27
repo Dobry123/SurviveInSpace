@@ -9,11 +9,11 @@ namespace sis
 		l1_.asteroid = 50;
 		l1_.asteroid_difficult = 1;
 
-		l2_.time = 30;
+		l2_.time = 15;
 		l2_.asteroid = 30;
 		l2_.asteroid_difficult = 1;
 
-		l3_.time = 30;
+		l3_.time = 15;
 		l3_.asteroid = 30;
 		l3_.asteroid_difficult = 1;
 

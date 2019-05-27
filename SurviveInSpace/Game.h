@@ -11,6 +11,7 @@
 #include "HUD.h"
 #include "Level.h"
 #include "UpdateScreen.h"
+#include "PauseScreen.h"
 
 namespace sis
 {
@@ -19,7 +20,7 @@ namespace sis
 	public:
 		Game();
 		~Game();
-		void run();
+		void run(bool new_game = false);
 
 	private:
 		sf::RenderWindow *window_;

@@ -19,7 +19,7 @@ namespace sis
 		int process();
 		std::string inputNameScreen();
 
-	private:
+	protected:
 		sf::RenderWindow *window_;
 		AssetManager *assets_;
 		Scoreboard *scoreboard_;

@@ -21,6 +21,7 @@ namespace sis
 		int process(float dt, LevelData lvl_data);
 		SpaceShip *getSpaceShip() { return spaceship_; }
 		void clearEnemyObjects();
+		void restartSpaceShipPosition();
 	private:
 		sf::RenderWindow *window_;
 		AssetManager *assets_;

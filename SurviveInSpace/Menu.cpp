@@ -89,6 +89,10 @@ namespace sis
 		}
 		choice_selected_ = false;
 
+		// delay
+		clock_.restart();
+		while (clock_.getElapsedTime().asSeconds() < delayTime_) {}
+
 		if (current_choice_ == 2)
 			showScoreboard();
 		return current_choice_;

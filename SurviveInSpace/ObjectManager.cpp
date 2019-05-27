@@ -178,4 +178,9 @@ namespace sis
 				--i;
 		}
 	}
+
+	void ObjectManager::restartSpaceShipPosition()
+	{
+		spaceship_->setPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	}
 }

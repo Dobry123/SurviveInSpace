@@ -13,6 +13,7 @@ namespace sis
 		SpaceShip(sf::RenderWindow *window, AssetManager *assets);
 		void update(float dt);
 		void draw();
+		void setPosition(float x, float y);
 
 		int getShotPower() { return shot_stats_.power; }
 		float getShotHz() { return shot_stats_.hz; }

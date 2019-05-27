@@ -36,25 +36,46 @@ namespace sis
 
 	}
 
-	void Game::run()
+	void Game::run(bool new_game)
 	{
-		int result = menu_->process();
+		int result;
+		if (new_game)
+			result = 0;
+		else
+			result = menu_->process();
 		if (result == 3)
 			window_->close();
 		else
 		{
 			if (restartForNewGame())
 			{
-				if (gameLoop() == 1)
+				while (1)
 				{
-					UpdateScreen *updateScreen = new UpdateScreen(window_, assets_, player_, object_manager_->getSpaceShip());
-					updateScreen->process();
-					delete updateScreen;
-					// update screen
-					level_->levelUp();
+					int game_loop_state = gameLoop();
+
+					if (game_loop_state == -1) // End game
+					{
+						run();
+						return;
+					}
+					
+					if (game_loop_state == 0) // New game
+					{
+						run(true);
+						return;
+					}
+
+					if (game_loop_state == 1) // Level end
+					{
+						// update screen
+						UpdateScreen *updateScreen = new UpdateScreen(window_, assets_, player_, object_manager_->getSpaceShip());
+						updateScreen->process();
+						delete updateScreen;
+
+						level_->levelUp();
+					}
 				}
 			}
-				
 			else
 				run();
 		}
@@ -62,20 +83,37 @@ namespace sis
 
 	int Game::gameLoop()
 	{
-		float newTime, currentTime, frameTime;
+		object_manager_->restartSpaceShipPosition();
+		float newTime, currentTime, frameTime, timeOnPause = 0;
 		float accumulator = 0.0f;
 		int ob_state = 0;
 		currentTime = clock_.getElapsedTime().asSeconds();
 		level_clock_.restart();
-		while (window_->isOpen() && !sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+		while (window_->isOpen())
 		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			{
+				float tmp = level_clock_.getElapsedTime().asSeconds();
+				PauseScreen *ps = new PauseScreen(window_, assets_, scoreboard_);
+				int pause_state = ps->process();
+				delete ps;
+				if (pause_state == 1)
+					return 0;
+
+				if(pause_state == 3)
+					window_->close();
+
+				newTime = clock_.getElapsedTime().asSeconds();
+				currentTime = newTime;
+				timeOnPause += level_clock_.getElapsedTime().asSeconds() - tmp;
+			}
 			newTime = clock_.getElapsedTime().asSeconds();
 			frameTime = newTime - currentTime;
 
 			currentTime = newTime;
 			accumulator += frameTime;
 
-			float time_left = level_->getLevelData().time - level_clock_.getElapsedTime().asSeconds();
+			float time_left = level_->getLevelData().time - level_clock_.getElapsedTime().asSeconds() + timeOnPause;
 
 			while (accumulator >= frameRate_)
 			{

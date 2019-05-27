@@ -62,6 +62,9 @@ namespace sis
 			{
 				choice_selected_ = true;
 				current_choice_ = -1;
+				// delay
+				clock_.restart();
+				while(clock_.getElapsedTime().asSeconds() < delayTime_) { }
 			}
 		}
 	}

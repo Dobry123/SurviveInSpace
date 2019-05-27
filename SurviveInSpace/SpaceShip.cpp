@@ -107,4 +107,11 @@ namespace sis
 			last_shot_time_ = clock_.getElapsedTime().asSeconds();
 		}
 	}
+
+	void SpaceShip::setPosition(float x, float y)
+	{
+		sprite_.setPosition(sf::Vector2f(x, y));
+		pose_.y = y;
+		pose_.x = x;
+	}
 }
