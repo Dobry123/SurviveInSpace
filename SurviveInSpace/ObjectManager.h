@@ -19,6 +19,8 @@ namespace sis
 		~ObjectManager();
 		void draw();
 		int process(float dt, LevelData lvl_data);
+		SpaceShip *getSpaceShip() { return spaceship_; }
+		void clearEnemyObjects();
 	private:
 		sf::RenderWindow *window_;
 		AssetManager *assets_;
@@ -31,7 +33,6 @@ namespace sis
 		SpaceShip *spaceship_;
 		void checkCollisions();
 		void processShots(float dt);
-		void clearObjects();
 	};
 }
 

@@ -13,6 +13,16 @@ namespace sis
 		SpaceShip(sf::RenderWindow *window, AssetManager *assets);
 		void update(float dt);
 		void draw();
+
+		int getShotPower() { return shot_stats_.power; }
+		float getShotHz() { return shot_stats_.hz; }
+		float getShotRange() { return shot_stats_.range; }
+		float getShotSpeed() { return shot_stats_.speed; }
+
+		void upgradeShotPower() { shot_stats_.power += 25; }
+		void upgradeShotHz() { shot_stats_.hz += 25; }
+		void upgradeShotRange() { shot_stats_.range += 50; }
+		void upgradeShotSpeed() { shot_stats_.speed += 1; }
 	private:
 		void shot();
 		void move(float dt);

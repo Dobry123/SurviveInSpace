@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "HUD.h"
 #include "Level.h"
+#include "UpdateScreen.h"
 
 namespace sis
 {
@@ -34,7 +35,8 @@ namespace sis
 		Level *level_;
 		int state_;
 		void loadAssets();
-		void gameLoop();
+		int gameLoop();
+		bool restartForNewGame();
 	};
 }
 

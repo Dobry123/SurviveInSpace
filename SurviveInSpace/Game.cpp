@@ -43,28 +43,28 @@ namespace sis
 			window_->close();
 		else
 		{
-			level_ = new Level();
-			state_ = 0;
-			player_ = new Player();
-			object_manager_ = new ObjectManager(window_, assets_, player_);
-			hud_ = new HUD(window_, assets_, player_);
-			gameLoop();
+			if (restartForNewGame())
+			{
+				if (gameLoop() == 1)
+				{
+					UpdateScreen *updateScreen = new UpdateScreen(window_, assets_, player_, object_manager_->getSpaceShip());
+					updateScreen->process();
+					delete updateScreen;
+					// update screen
+					level_->levelUp();
+				}
+			}
+				
+			else
+				run();
 		}
 	}
 
-	void Game::gameLoop()
+	int Game::gameLoop()
 	{
-		player_->setName(menu_->inputNameScreen());
-		std::cout << player_->getName() << std::endl;
-		if (player_->getName() == "")
-		{
-			run();
-			return;
-		}
-
-		//Game loop
 		float newTime, currentTime, frameTime;
 		float accumulator = 0.0f;
+		int ob_state = 0;
 		currentTime = clock_.getElapsedTime().asSeconds();
 		level_clock_.restart();
 		while (window_->isOpen() && !sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -80,7 +80,7 @@ namespace sis
 			while (accumulator >= frameRate_)
 			{
 				// update
-				state_ = object_manager_->process(frameRate_, level_->getLevelData());
+				ob_state = object_manager_->process(frameRate_, level_->getLevelData());
 				accumulator -= frameRate_;
 			}
 
@@ -92,13 +92,33 @@ namespace sis
 
 			if (time_left <= 0)
 			{
-				level_->levelUp();
-				level_clock_.restart();
+				object_manager_->clearEnemyObjects();
+				
+				return 1; // level end
 			}
 
-			if (state_ == -1)
-				break;
+			if (ob_state == -1)
+				return -1; // game end
 		}
-		run();
+	}
+
+	bool Game::restartForNewGame()
+	{
+		delete level_;
+		delete player_;
+		delete hud_;
+		delete object_manager_;
+
+		level_ = new Level();
+		state_ = 0;
+		player_ = new Player();
+		object_manager_ = new ObjectManager(window_, assets_, player_);
+		hud_ = new HUD(window_, assets_, player_);
+
+		player_->setName(menu_->inputNameScreen());
+		if (player_->getName() == "")
+			return false;
+		else
+			return true;
 	}
 }

@@ -18,7 +18,7 @@ namespace sis
 		sprite_.setScale(sf::Vector2f(2, 2));
 		r_ = 15 * sprite_.getScale().x;
 		
-		shot_stats_.hz = 0.12f;
+		shot_stats_.hz = 0.12;
 		shot_stats_.power = 50;
 		shot_stats_.range = 500;
 		shot_stats_.speed = 500;

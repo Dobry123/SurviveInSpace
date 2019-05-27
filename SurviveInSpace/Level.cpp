@@ -5,8 +5,8 @@ namespace sis
 	Level::Level():
 		current_level_(1)
 	{
-		l1_.time = 10;
-		l1_.asteroid = 2;
+		l1_.time = 15;
+		l1_.asteroid = 50;
 		l1_.asteroid_difficult = 1;
 
 		l2_.time = 30;

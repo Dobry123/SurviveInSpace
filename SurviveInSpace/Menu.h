@@ -32,7 +32,7 @@ namespace sis
 		int menuTextsSize_;
 		int current_choice_;
 		bool choice_selected_;
-
+		
 		void handleInput();
 		void draw();
 		void showScoreboard();

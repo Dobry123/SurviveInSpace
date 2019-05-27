@@ -13,6 +13,7 @@ namespace sis
 
 	ObjectManager::~ObjectManager()
 	{
+		clearEnemyObjects();
 		delete spaceship_;
 	}
 
@@ -27,8 +28,9 @@ namespace sis
 		}
 		else if (explosions_.empty())
 		{
-			clearObjects();
-			return -1;
+			clearEnemyObjects();
+			delete spaceship_;
+			return -1; // end game
 		}
 
 		processShots(dt);
@@ -158,7 +160,7 @@ namespace sis
 		}
 	}
 	
-	void ObjectManager::clearObjects()
+	void ObjectManager::clearEnemyObjects()
 	{
 		for (int i = 0; i < asteroids_.size(); ++i)
 		{
