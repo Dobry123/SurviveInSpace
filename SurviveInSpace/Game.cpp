@@ -53,26 +53,25 @@ namespace sis
 				{
 					int game_loop_state = gameLoop();
 
-					if (game_loop_state == -1) // End game
+					switch (game_loop_state)
 					{
+					case -1:		// End game
 						run();
 						return;
-					}
-					
-					if (game_loop_state == 0) // New game
-					{
+					case 1:			// New game
 						run(true);
 						return;
-					}
-
-					if (game_loop_state == 1) // Level end
-					{
+					case 3:			// Exit
+						window_->close();
+						return;
+					case 99:		// Level end
 						// update screen
 						UpdateScreen *updateScreen = new UpdateScreen(window_, assets_, player_, object_manager_->getSpaceShip());
 						updateScreen->process();
 						delete updateScreen;
 
 						level_->levelUp();
+						break;
 					}
 				}
 			}
@@ -97,11 +96,8 @@ namespace sis
 				PauseScreen *ps = new PauseScreen(window_, assets_, scoreboard_);
 				int pause_state = ps->process();
 				delete ps;
-				if (pause_state == 1)
-					return 0;
-
-				if(pause_state == 3)
-					window_->close();
+				if (pause_state != 0)
+					return pause_state;
 
 				newTime = clock_.getElapsedTime().asSeconds();
 				currentTime = newTime;
@@ -132,7 +128,7 @@ namespace sis
 			{
 				object_manager_->clearEnemyObjects();
 				
-				return 1; // level end
+				return 99; // level end
 			}
 
 			if (ob_state == -1)
