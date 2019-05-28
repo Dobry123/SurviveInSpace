@@ -27,5 +27,11 @@
 #define SHOT_TYPE_0_FILEPATH "Data/shot_type_0.png"
 #define SHOT_TYPE_0 "shot_type_0"
 
+#define SHOT_TYPE_1_FILEPATH "Data/shot_type_1.png"
+#define SHOT_TYPE_1 "shot_type_1"
+
 #define MENU_FONT_FILEPATH "Data/DISTGRG_.ttf"
 #define MENU_FONT "menu_font"
+
+#define CRUISER_FILEPATH "Data/cruiser.png"
+#define CRUISER "cruiser_tex"

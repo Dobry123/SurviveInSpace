@@ -3,11 +3,10 @@
 namespace sis
 {
 	Explosion::Explosion(sf::RenderWindow *window, AssetManager *assets, Pose pose):
+		Object(window, assets),
 		end_(false),
 		animation_counter_(0)
 	{
-		window_ = window;
-		assets_ = assets;
 		pose_ = pose;
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 		sprite_.setOrigin(sf::Vector2f(25, 25));

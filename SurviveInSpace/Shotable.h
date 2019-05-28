@@ -10,8 +10,10 @@ namespace sis
 	class Shotable :public Object
 	{
 	public:
+		Shotable(sf::RenderWindow *window, AssetManager *assets) : Object(window, assets) { }
 		virtual void update(float dt) = 0;
 		virtual void draw() = 0;
+		virtual int getType() = 0;
 		std::vector<Shot *> getShots() { return createdShots_; }
 		bool ifShot() { return did_shot_; }
 	protected:

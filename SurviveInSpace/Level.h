@@ -9,6 +9,8 @@ namespace sis
 		float time; // in seconds
 		int asteroid;
 		int asteroid_difficult;
+		int cruiser;
+		int cruiser_difficult;
 	};
 
 	class Level

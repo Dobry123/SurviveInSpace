@@ -3,11 +3,10 @@
 namespace sis
 {
 	Shot::Shot(sf::RenderWindow *window, AssetManager *assets, Pose pose, ShotStats stats, int type) :
+		Object(window, assets),
 		toDestroy_(false),
 		distance_(0)
 	{
-		window_ = window;
-		assets_ = assets;
 		pose_ = pose;
 		
 		stats_ = stats;
@@ -20,6 +19,12 @@ namespace sis
 			sprite_.setTexture(assets_->getTexture(SHOT_TYPE_0));
 			sprite_.setOrigin(sf::Vector2f(10, 12));
 			r_ = 4;
+			break;
+		case 1:
+			sprite_.setTexture(assets_->getTexture(SHOT_TYPE_1));
+			sprite_.setOrigin(sf::Vector2f(9, 10));
+			r_ = 5;
+			break;
 		}
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 		sprite_.setRotation(pose_.rotation);

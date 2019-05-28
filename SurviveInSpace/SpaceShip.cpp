@@ -2,10 +2,9 @@
 
 namespace sis
 {
-	SpaceShip::SpaceShip(sf::RenderWindow *window, AssetManager *assets)
+	SpaceShip::SpaceShip(sf::RenderWindow *window, AssetManager *assets) :
+		Shotable(window, assets)
 	{
-		window_ = window;
-		assets_ = assets;
 		pose_.x = WINDOW_WIDTH / 2;
 		pose_.y = WINDOW_HEIGHT / 2;
 		pose_.rotation = 0;
@@ -18,7 +17,7 @@ namespace sis
 		sprite_.setScale(sf::Vector2f(2, 2));
 		r_ = 15 * sprite_.getScale().x;
 		
-		shot_stats_.hz = 0.12;
+		shot_stats_.hz = 2;
 		shot_stats_.power = 50;
 		shot_stats_.range = 500;
 		shot_stats_.speed = 500;
@@ -96,7 +95,7 @@ namespace sis
 	void SpaceShip::shot()
 	{
 		float time_lasts = clock_.getElapsedTime().asSeconds() - last_shot_time_;
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && time_lasts > shot_stats_.hz)
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && time_lasts > 1 / shot_stats_.hz)
 		{
 			did_shot_ = true;
 			Pose shot_pose = pose_;

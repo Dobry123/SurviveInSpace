@@ -21,9 +21,11 @@ namespace sis
 		float getShotSpeed() { return shot_stats_.speed; }
 
 		void upgradeShotPower() { shot_stats_.power += 25; }
-		void upgradeShotHz() { shot_stats_.hz += 25; }
-		void upgradeShotRange() { shot_stats_.range += 50; }
-		void upgradeShotSpeed() { shot_stats_.speed += 1; }
+		void upgradeShotHz() { shot_stats_.hz += 2; }
+		void upgradeShotRange() { shot_stats_.range += 25; }
+		void upgradeShotSpeed() { shot_stats_.speed += 25; }
+
+		int getType() { return 0; }
 	private:
 		void shot();
 		void move(float dt);

@@ -31,7 +31,9 @@ namespace sis
 		assets_->LoadTexture(ASTEROID, ASTEROID_FILEPATH);
 		assets_->LoadTexture(SPACESHIP, SPACESHIP_FILEPATH);
 		assets_->LoadTexture(SHOT_TYPE_0, SHOT_TYPE_0_FILEPATH);
+		assets_->LoadTexture(SHOT_TYPE_1, SHOT_TYPE_1_FILEPATH);
 		assets_->LoadTexture(EXPLOSION_1, EXPLOSION_1_FILEPATH);
+		assets_->LoadTexture(CRUISER, CRUISER_FILEPATH);
 		assets_->LoadFont(MENU_FONT, MENU_FONT_FILEPATH);
 
 	}
@@ -56,12 +58,15 @@ namespace sis
 					switch (game_loop_state)
 					{
 					case -1:		// End game
+						scoreboard_->addNewScore(player_->getName(), player_->getScore());
 						run();
 						return;
 					case 1:			// New game
+						scoreboard_->addNewScore(player_->getName(), player_->getScore());
 						run(true);
 						return;
 					case 3:			// Exit
+						scoreboard_->addNewScore(player_->getName(), player_->getScore());
 						window_->close();
 						return;
 					case 99:		// Level end
@@ -141,14 +146,13 @@ namespace sis
 		delete level_;
 		delete player_;
 		delete hud_;
-		delete object_manager_;
-
+		//delete object_manager_;
+		
 		level_ = new Level();
 		state_ = 0;
 		player_ = new Player();
 		object_manager_ = new ObjectManager(window_, assets_, player_);
 		hud_ = new HUD(window_, assets_, player_);
-
 		player_->setName(menu_->inputNameScreen());
 		if (player_->getName() == "")
 			return false;

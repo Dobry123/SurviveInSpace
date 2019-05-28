@@ -19,6 +19,11 @@ namespace sis
 	class Object
 	{
 	public:
+		Object(sf::RenderWindow *window, AssetManager *assets)
+		{
+			window_ = window;
+			assets_ = assets;
+		}
 		virtual void update(float dt) = 0;
 		virtual void draw() = 0;
 		float getR() { return r_; }

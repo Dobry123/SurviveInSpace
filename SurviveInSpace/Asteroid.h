@@ -9,7 +9,7 @@ namespace sis
 	class Asteroid :public Object
 	{
 	public:
-		Asteroid(sf::RenderWindow *window, AssetManager *assets);
+		Asteroid(sf::RenderWindow *window, AssetManager *assets, int difficult = 1);
 		~Asteroid() {}
 		void update(float dt);
 		void draw();

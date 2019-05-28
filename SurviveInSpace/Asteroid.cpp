@@ -1,22 +1,19 @@
 #include "Asteroid.h"
-#include <iostream>
 
 namespace sis
 {
-	Asteroid::Asteroid(sf::RenderWindow *window, AssetManager *assets):
+	Asteroid::Asteroid(sf::RenderWindow *window, AssetManager *assets, int difficult):
+		Object(window, assets),
 		animation_counter_(0)
 	{
-		window_ = window;
-		assets_ = assets;
-		
 		std::random_device dev;
 		std::mt19937 rng(dev());
 		std::uniform_int_distribution<int> intDistWidth(1, WINDOW_WIDTH);
 		std::uniform_real_distribution<float> floatDist0_1(0, 1);
 
-		hp_ = 100;
+		hp_ = 50 * difficult;
 		pose_.rotation = 360 * floatDist0_1(rng);
-		speed_ = 120 + 50 * floatDist0_1(rng);
+		speed_ = 120 + 50 * floatDist0_1(rng) * difficult;
 		animation_speed_ = speed_ / 300;
 
 		sprite_.setTextureRect(sf::IntRect(0, 0, 64, 64));
