@@ -4,7 +4,7 @@
 4 mmat 470
 5 mat 390
 6 mat 310
-7 mat 280
+7 mat 300
 8 mat 280
-9 mat 260
-10 mat 240
+9 mat 280
+10 mat 280

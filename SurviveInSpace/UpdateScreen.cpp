@@ -12,10 +12,12 @@ namespace sis
 		assets_ = assets;
 		backgroundSprite_.setTexture(assets_->getTexture(UPGRADE_BACKGROUND));
 
-		texts_[0] = "Hz";
-		texts_[1] = "Power";
-		texts_[2] = "Range";
-		texts_[3] = "Speed";
+		texts_[0] = "Shot Hz";
+		texts_[1] = "Shot Power";
+		texts_[2] = "Shot Range";
+		texts_[3] = "Shot Speed";
+		texts_[4] = "Number of shots";
+		texts_[5] = "Hp";
 
 		spaceship_ = spaceship;
 		player_ = player;
@@ -90,32 +92,40 @@ namespace sis
 			switch (i)
 			{
 			case 0:
-				ss << "Hz\t\t\t\t" << spaceship_->getShotHz() << "\t -50 PLN";
+				ss << "Shot Hz\t\t\t\t\t" << spaceship_->getShotHz() << "\t -50 PLN";
 				text_.setString(ss.str());
 				break;
 
 			case 1:
-				ss << "Power\t\t" << spaceship_->getShotPower() << "\t -50 PLN";
+				ss << "Shot Power\t\t\t" << spaceship_->getShotPower() << "\t -50 PLN";
 				text_.setString(ss.str());
 				break;
 			case 2:
-				ss << "Range\t\t" << spaceship_->getShotRange() << "\t -50 PLN";
+				ss << "Shot Range\t\t\t" << spaceship_->getShotRange() << "\t -50 PLN";
 				text_.setString(ss.str());
 				break;
 			case 3:
-				ss << "Speed\t\t" << spaceship_->getShotSpeed() << "\t -50 PLN";
+				ss << "Shot Speed\t\t\t" << spaceship_->getShotSpeed() << "\t -50 PLN";
+				text_.setString(ss.str());
+				break;
+			case 4:
+				ss << "Number of shots\t\t" << spaceship_->getShotsNumber() << "\t -500 PLN";
+				text_.setString(ss.str());
+				break;
+			case 5:
+				ss << "Hp\t\t\t\t\t\t" << spaceship_->getHp() << "\t -50 PLN";
 				text_.setString(ss.str());
 				break;
 			}
 
-			text_.setPosition(sf::Vector2f(WINDOW_WIDTH / 10, (i + 2) * WINDOW_HEIGHT / 10));
+			text_.setPosition(sf::Vector2f(WINDOW_WIDTH / 18, (i + 2) * WINDOW_HEIGHT / 10));
 			window_->draw(text_);
 
 			if (current_choice_ == i)
 			{
 				text_.setString(">> ");
 				text_.setFillColor(sf::Color::Yellow);
-				text_.setPosition(sf::Vector2f(150, (i + 2) * WINDOW_HEIGHT / 10));
+				text_.setPosition(sf::Vector2f(25, (i + 2) * WINDOW_HEIGHT / 10));
 				window_->draw(text_);
 
 				text_.setFillColor(sf::Color::White);
@@ -170,6 +180,23 @@ namespace sis
 			if (player_->getMoney() >= 50)
 			{
 				spaceship_->upgradeShotSpeed();
+				player_->spendMoney(50);
+			}
+			break;
+		case 4:
+			if (player_->getMoney() >= 500)
+			{
+				if (spaceship_->getShotsNumber() < 4)
+				{
+					spaceship_->upgradeShotsNumber();
+					player_->spendMoney(50);
+				}
+			}
+			break;
+		case 5:
+			if (player_->getMoney() >= 50)
+			{
+				spaceship_->addHp();
 				player_->spendMoney(50);
 			}
 			break;

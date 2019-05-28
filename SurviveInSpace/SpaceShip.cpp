@@ -10,6 +10,7 @@ namespace sis
 		pose_.rotation = 0;
 		speed_ = 500;
 		hp_ = 100;
+		shots_number_ = 1;
 
 		sprite_.setTexture(assets_->getTexture(SPACESHIP));
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
@@ -99,11 +100,56 @@ namespace sis
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && time_lasts > 1 / shot_stats_.hz)
 		{
 			did_shot_ = true;
-			Pose shot_pose = pose_;
-			shot_pose.x += sin(pose_.rotation * PI / 180) * 35;
-			shot_pose.y += -cos(pose_.rotation * PI / 180) * 35;
-			Shot *shot = new Shot(window_, assets_, shot_pose, shot_stats_, 0);
-			createdShots_.push_back(shot);
+			switch (shots_number_)
+			{
+			case 1:
+			{
+				Pose shot_pose = pose_;
+				shot_pose.x += sin(pose_.rotation * PI / 180) * 35;
+				shot_pose.y += -cos(pose_.rotation * PI / 180) * 35;
+				Shot *shot = new Shot(window_, assets_, shot_pose, shot_stats_, 0);
+				createdShots_.push_back(shot);
+			}
+				break;
+			case 2:
+			{
+				Pose shot_pose = pose_;
+				shot_pose.rotation -= 10;
+				shot_pose.x += sin(pose_.rotation * PI / 180) * 35;
+				shot_pose.y += -cos(pose_.rotation * PI / 180) * 35;
+				Shot *shot = new Shot(window_, assets_, shot_pose, shot_stats_, 0);
+				createdShots_.push_back(shot);
+				shot_pose = pose_;
+				shot_pose.rotation += 10;
+				shot_pose.x += sin(pose_.rotation * PI / 180) * 35;
+				shot_pose.y += -cos(pose_.rotation * PI / 180) * 35;
+				shot = new Shot(window_, assets_, shot_pose, shot_stats_, 0);
+				createdShots_.push_back(shot);
+			}
+				break;
+			case 3:
+			{
+				Pose shot_pose = pose_;
+				shot_pose.x += sin(pose_.rotation * PI / 180) * 35;
+				shot_pose.y += -cos(pose_.rotation * PI / 180) * 35;
+				Shot *shot = new Shot(window_, assets_, shot_pose, shot_stats_, 0);
+				createdShots_.push_back(shot);
+				shot_pose = pose_;
+				shot_pose.rotation -= 12;
+				shot_pose.x += sin(pose_.rotation * PI / 180) * 35;
+				shot_pose.y += -cos(pose_.rotation * PI / 180) * 35;
+				shot = new Shot(window_, assets_, shot_pose, shot_stats_, 0);
+				createdShots_.push_back(shot);
+				shot_pose = pose_;
+				shot_pose.rotation += 12;
+				shot_pose.x += sin(pose_.rotation * PI / 180) * 35;
+				shot_pose.y += -cos(pose_.rotation * PI / 180) * 35;
+				shot = new Shot(window_, assets_, shot_pose, shot_stats_, 0);
+				createdShots_.push_back(shot);
+			}
+			break;
+			}
+			
 			last_shot_time_ = clock_.getElapsedTime().asSeconds();
 		}
 	}

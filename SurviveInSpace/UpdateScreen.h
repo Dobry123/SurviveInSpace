@@ -30,7 +30,7 @@ namespace sis
 		int menuTextsSize_;
 		int current_choice_;
 		bool choice_selected_;
-		std::string texts_[4];
+		std::string texts_[6];
 
 		void handleInput();
 		void draw();
