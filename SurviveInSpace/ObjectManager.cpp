@@ -11,6 +11,8 @@ namespace sis
 		spaceship_ = new SpaceShip(window_, assets_);
 		cruisers_amount_ = 0;
 		boarders_amount_ = 0;
+		boss_spawned_ = false;
+		boss_killed_ = false;
 	}
 
 	ObjectManager::~ObjectManager()
@@ -67,6 +69,13 @@ namespace sis
 			}
 		}
 
+		// spawn boss
+		if (lvl_data.boss1 && !boss_spawned_)
+		{
+			enemies_.push_back(new Boss1(window_, assets_, lvl_data.boarder_difficult));
+			boss_spawned_ = true;
+		}
+
 		// update asteroids
 		for (int i = 0; i < asteroids_.size(); ++i)
 		{
@@ -92,6 +101,10 @@ namespace sis
 			else
 				explosions_[i]->update(dt);
 		}
+
+		if (lvl_data.boss1 && boss_killed_)
+			return 99;
+
 		return 0;
 	}
 
@@ -131,7 +144,8 @@ namespace sis
 		// crate new spaceship shots
 		if (spaceship_->ifShot())
 		{
-			spaceship_shots_.push_back(spaceship_->getShots()[0]);
+			for (int j = 0; j < spaceship_->getShots().size(); ++j)
+				spaceship_shots_.push_back(spaceship_->getShots()[j]);
 		}
 
 		// crate new enemies shots
@@ -139,7 +153,8 @@ namespace sis
 		{
 			if (enemies_[i]->ifShot())
 			{
-				enemy_shots_.push_back(enemies_[i]->getShots()[0]);
+				for(int j = 0; j < enemies_[i]->getShots().size(); ++j)
+					enemy_shots_.push_back(enemies_[i]->getShots()[j]);
 			}
 		}
 
@@ -284,8 +299,10 @@ namespace sis
 
 						if (enemies_[j]->getType() == 1)
 							--cruisers_amount_;
-						else if(enemies_[j]->getType() == 2)
+						else if (enemies_[j]->getType() == 2)
 							--boarders_amount_;
+						else if (enemies_[j]->getType() == 90)
+							boss_killed_ = true;
 						delete enemies_[j];
 						enemies_.erase(enemies_.begin() + j);
 						if (j > -1)
@@ -333,6 +350,9 @@ namespace sis
 			if (i > -1)
 				--i;
 		}
+		cruisers_amount_ = 0;
+		boarders_amount_ = 0;
+		boss_spawned_ = false;
 	}
 
 	void ObjectManager::restartSpaceShipPosition()

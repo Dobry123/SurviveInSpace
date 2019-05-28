@@ -1,8 +1,8 @@
-#include "BoarderEnemy.h"
+#include "Boss1.h"
 
 namespace sis
 {
-	BoarderEnemy::BoarderEnemy(sf::RenderWindow *window, AssetManager *assets, int difficult) :
+	Boss1::Boss1(sf::RenderWindow *window, AssetManager *assets, int difficult) :
 		Shotable(window, assets),
 		move_reversed_x_(false),
 		move_reversed_y_(false)
@@ -11,18 +11,18 @@ namespace sis
 		std::uniform_int_distribution<int> intDistHeight(1, WINDOW_HEIGHT / 2);
 		std::uniform_real_distribution<float> floatDist0_1(0, 1);
 
-		hp_ = 50 * difficult;
-		pose_.x = 0;
-		pose_.y = intDistHeight(rng);
+		hp_ = 2000 * difficult;
+		pose_.x = WINDOW_WIDTH / 2;
+		pose_.y = 100;
 		pose_.rotation = 180;
 		speed_ = 120 + 50 * floatDist0_1(rng) * difficult;
 
-		sprite_.setTexture(assets_->getTexture(BOARDER));
+		sprite_.setTexture(assets_->getTexture(BOSS_1));
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 		sprite_.setRotation(pose_.rotation);
-		sprite_.setOrigin(sf::Vector2f(19, 18));
-		sprite_.setScale(sf::Vector2f(2, 2));
-		r_ = 15 * sprite_.getScale().x;
+		sprite_.setOrigin(sf::Vector2f(58, 55));
+		sprite_.setScale(sf::Vector2f(3, 3));
+		r_ = 46 * sprite_.getScale().x;
 
 		shot_stats_.hz = 1 * difficult;
 		shot_stats_.power = 25 * difficult;
@@ -32,12 +32,12 @@ namespace sis
 		last_shot_time_ = clock_.getElapsedTime().asSeconds();
 	}
 
-	void BoarderEnemy::draw()
+	void Boss1::draw()
 	{
 		window_->draw(sprite_);
 	}
 
-	void BoarderEnemy::update(float dt)
+	void Boss1::update(float dt)
 	{
 		if (did_shot_)
 		{
@@ -48,21 +48,15 @@ namespace sis
 		move(dt);
 	}
 
-	void BoarderEnemy::move(float dt)
+	void Boss1::move(float dt)
 	{
 		std::mt19937 rng(dev_());
 		std::uniform_int_distribution<int> reversedRandom(1, 200);
 		if (reversedRandom(rng) % 199 == 0)
-			if (move_reversed_x_)
-				move_reversed_x_ = false;
-			else
-				move_reversed_x_ = true;
+			move_reversed_x_ = !move_reversed_x_;
 
 		if (reversedRandom(rng) % 199 == 0)
-			if (move_reversed_y_)
-				move_reversed_y_ = false;
-			else
-				move_reversed_y_ = true;
+			move_reversed_y_ = !move_reversed_y_;
 
 		if (move_reversed_x_)
 			pose_.x -= speed_ * dt;
@@ -74,43 +68,42 @@ namespace sis
 		else
 			pose_.y += speed_ * dt;
 
-		if (pose_.x > GAME_WIDTH_MAX + 30)
+		if (pose_.x > GAME_WIDTH_MAX + 100)
 		{
-			sprite_.setPosition(sf::Vector2f(GAME_WIDTH_MIN - 30, pose_.y));
-			pose_.x = GAME_WIDTH_MIN - 30;
+			move_reversed_x_ = !move_reversed_x_;
 		}
 
-		if (pose_.x < GAME_WIDTH_MIN - 30)
+		if (pose_.x < GAME_WIDTH_MIN - 100)
 		{
-			sprite_.setPosition(sf::Vector2f(GAME_WIDTH_MAX + 30, pose_.y));
-			pose_.x = GAME_WIDTH_MAX + 30;
+			move_reversed_x_ = !move_reversed_x_;
 		}
 
-		if (pose_.y > GAME_HEIGHT + 30)
+		if (pose_.y > GAME_HEIGHT + 100)
 		{
-			sprite_.setPosition(sf::Vector2f(pose_.x, -30));
-			pose_.y = - 30;
+			move_reversed_y_ = !move_reversed_y_;
 		}
 
-		if (pose_.y < - 30)
+		if (pose_.y < -100)
 		{
-			sprite_.setPosition(sf::Vector2f(pose_.x, GAME_HEIGHT + 30));
-			pose_.y = GAME_HEIGHT + 30;
+			move_reversed_y_ = !move_reversed_y_;
 		}
 
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 	}
 
-	void BoarderEnemy::shot()
+	void Boss1::shot()
 	{
 		float time_lasts = clock_.getElapsedTime().asSeconds() - last_shot_time_;
 		if (time_lasts > 1 / shot_stats_.hz)
 		{
 			did_shot_ = true;
 			Pose shot_pose = pose_;
-			shot_pose.y += 35;
-			Shot *shot = new Shot(window_, assets_, shot_pose, shot_stats_, 1);
-			createdShots_.push_back(shot);
+			for (int i = 0; i < 360; i+=7)
+			{
+				shot_pose.rotation = i;
+				Shot *shot = new Shot(window_, assets_, shot_pose, shot_stats_, 1);
+				createdShots_.push_back(shot);
+			}
 			last_shot_time_ = clock_.getElapsedTime().asSeconds();
 		}
 	}

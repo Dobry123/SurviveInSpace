@@ -48,6 +48,9 @@
 #define BOARDER_FILEPATH "Data/boarder.png"
 #define BOARDER "boarder_tex"
 
+#define BOSS_1_FILEPATH "Data/boss_1.png"
+#define BOSS_1 "BOSS_1_tex"
+
 #define HUD_EDGE_FILEPATH "Data/HUD_edge.png"
 #define HUD_EDGE "HUD_edge"
 

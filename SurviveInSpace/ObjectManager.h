@@ -11,6 +11,7 @@
 #include "Level.h"
 #include "CruiserEnemy.h"
 #include "BoarderEnemy.h"
+#include "Boss1.h"
 
 namespace sis
 {
@@ -36,6 +37,8 @@ namespace sis
 		SpaceShip *spaceship_;
 		int cruisers_amount_;
 		int boarders_amount_;
+		bool boss_spawned_;
+		bool boss_killed_;
 		
 		void checkCollisions();
 		void processShots(float dt);

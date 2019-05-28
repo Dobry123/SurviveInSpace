@@ -13,6 +13,7 @@ namespace sis
 		int cruiser_difficult;
 		int boarder;
 		int boarder_difficult;
+		bool boss1 = false;
 	};
 
 	class Level

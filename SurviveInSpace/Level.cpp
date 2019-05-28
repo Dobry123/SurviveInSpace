@@ -5,7 +5,7 @@ namespace sis
 	Level::Level():
 		current_level_(1)
 	{
-		l1_.time = 20;
+		l1_.time = 5;
 		l1_.asteroid = 30;
 		l1_.asteroid_difficult = 1;
 		l1_.cruiser = 2;
@@ -13,13 +13,14 @@ namespace sis
 		l1_.boarder = 2;
 		l1_.boarder_difficult = 1;
 
-		l2_.time = 15;
-		l2_.asteroid = 30;
-		l2_.asteroid_difficult = 5;
+		l2_.time = 99;
+		l2_.asteroid = 2;
+		l2_.asteroid_difficult = 2;
 		l2_.cruiser = 2;
 		l2_.cruiser_difficult = 1;
 		l2_.boarder = 2;
 		l2_.boarder_difficult = 1;
+		l2_.boss1 = true;
 
 		l3_.time = 15;
 		l3_.asteroid = 30;

@@ -36,6 +36,7 @@ namespace sis
 		assets_->LoadTexture(EXPLOSION_1, EXPLOSION_1_FILEPATH);
 		assets_->LoadTexture(CRUISER, CRUISER_FILEPATH);
 		assets_->LoadTexture(BOARDER, BOARDER_FILEPATH);
+		assets_->LoadTexture(BOSS_1, BOSS_1_FILEPATH);
 		assets_->LoadTexture(HUD_EDGE, HUD_EDGE_FILEPATH);
 		assets_->LoadTexture(HUD_BLACK, HUD_BLACK_FILEPATH);
 		assets_->LoadFont(MENU_FONT, MENU_FONT_FILEPATH);
@@ -131,7 +132,7 @@ namespace sis
 			hud_->draw(time_left, level_->getCurrentLevel());
 			window_->display();
 
-			if (time_left <= 0)
+			if (time_left <= 0 || ob_state == 99)
 			{
 				object_manager_->clearEnemyObjects();
 				
