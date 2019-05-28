@@ -9,6 +9,7 @@ namespace sis
 		pose_.y = WINDOW_HEIGHT / 2;
 		pose_.rotation = 0;
 		speed_ = 500;
+		hp_ = 100;
 
 		sprite_.setTexture(assets_->getTexture(SPACESHIP));
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
@@ -17,7 +18,7 @@ namespace sis
 		sprite_.setScale(sf::Vector2f(2, 2));
 		r_ = 15 * sprite_.getScale().x;
 		
-		shot_stats_.hz = 2;
+		shot_stats_.hz = 15;
 		shot_stats_.power = 50;
 		shot_stats_.range = 500;
 		shot_stats_.speed = 500;

@@ -205,6 +205,7 @@ namespace sis
 
 			if (d < asteroids_[i]->getR() + spaceship_->getR())
 			{
+				spaceship_->hit(spaceship_->getHp());
 				explosions_.push_back(new Explosion(window_, assets_, spaceship_->getPose()));
 				player_->minusLife();
 			}
@@ -220,6 +221,7 @@ namespace sis
 
 			if (d < enemies_[i]->getR() + spaceship_->getR())
 			{
+				spaceship_->hit(spaceship_->getHp());
 				explosions_.push_back(new Explosion(window_, assets_, spaceship_->getPose()));
 				player_->minusLife();
 			}

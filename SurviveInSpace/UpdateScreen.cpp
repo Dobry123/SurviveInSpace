@@ -10,19 +10,17 @@ namespace sis
 	{
 		window_ = window;
 		assets_ = assets;
-		backgroundSprite_.setTexture(assets_->getTexture(MENU_BACKGROUND));
+		backgroundSprite_.setTexture(assets_->getTexture(UPGRADE_BACKGROUND));
 
 		texts_[0] = "Hz";
 		texts_[1] = "Power";
 		texts_[2] = "Range";
 		texts_[3] = "Speed";
 
-		window_ = window;
-		assets_ = assets;
 		spaceship_ = spaceship;
 		player_ = player;
-		backgroundSprite_.setTexture(assets_->getTexture(MENU_BACKGROUND));
 		text_.setFont(assets_->getFont(MENU_FONT));
+		text_.setCharacterSize(60);
 	}
 
 	void UpdateScreen::handleInput()
@@ -74,50 +72,60 @@ namespace sis
 		window_->clear();
 		window_->draw(backgroundSprite_);
 
-		text_.setCharacterSize(60);
-
 		std::stringstream ss;
 		ss << "Money:  " << player_->getMoney() << " PLN";
 		text_.setString(ss.str());
-		text_.setPosition(sf::Vector2f(6 * WINDOW_WIDTH / 8, WINDOW_HEIGHT / 8));
+		text_.setFillColor(sf::Color::Yellow);
+		text_.setPosition(sf::Vector2f(0, 0));
 		window_->draw(text_);
+
+		text_.setFillColor(sf::Color::White);
+		text_.setString("Upgrade your ship");
+		text_.setPosition(sf::Vector2f(WINDOW_WIDTH / 2 - 200, 0));
+		window_->draw(text_);
+
 		for (int i = 0; i < menuTextsSize_; ++i)
 		{
 			ss.str("");
 			switch (i)
 			{
 			case 0:
-				ss << "Hz\t\t" << spaceship_->getShotHz();
+				ss << "Hz\t\t\t\t" << spaceship_->getShotHz() << "\t -50 PLN";
 				text_.setString(ss.str());
 				break;
 
 			case 1:
-				ss << "Power\t\t" << spaceship_->getShotPower();
+				ss << "Power\t\t" << spaceship_->getShotPower() << "\t -50 PLN";
 				text_.setString(ss.str());
 				break;
 			case 2:
-				ss << "Range\t\t" << spaceship_->getShotRange();
+				ss << "Range\t\t" << spaceship_->getShotRange() << "\t -50 PLN";
 				text_.setString(ss.str());
 				break;
 			case 3:
-				ss << "Speed\t\t" << spaceship_->getShotSpeed();
+				ss << "Speed\t\t" << spaceship_->getShotSpeed() << "\t -50 PLN";
 				text_.setString(ss.str());
 				break;
 			}
 
-			text_.setPosition(sf::Vector2f(WINDOW_WIDTH / 7, i * WINDOW_HEIGHT / 8));
+			text_.setPosition(sf::Vector2f(WINDOW_WIDTH / 10, (i + 2) * WINDOW_HEIGHT / 10));
 			window_->draw(text_);
 
 			if (current_choice_ == i)
 			{
 				text_.setString(">> ");
 				text_.setFillColor(sf::Color::Yellow);
-				text_.setPosition(sf::Vector2f(200, i * WINDOW_HEIGHT / 8));
+				text_.setPosition(sf::Vector2f(150, (i + 2) * WINDOW_HEIGHT / 10));
 				window_->draw(text_);
 
 				text_.setFillColor(sf::Color::White);
 			}
 		}
+
+		text_.setFillColor(sf::Color::Yellow);
+		text_.setString("ESC to continue");
+		text_.setPosition(sf::Vector2f(0, WINDOW_HEIGHT - 60));
+		window_->draw(text_);
 
 		window_->display();
 	}

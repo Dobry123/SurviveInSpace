@@ -8,7 +8,7 @@ namespace sis
 	{
 		assets_ = new AssetManager;
 		scoreboard_ = new Scoreboard;
-		window_ = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Survive in space", sf::Style::Close);
+		window_ = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Survive in space", sf::Style::Fullscreen);
 		loadAssets();
 		menu_ = new Menu(window_, assets_, scoreboard_);
 	}
@@ -26,6 +26,7 @@ namespace sis
 	void Game::loadAssets()
 	{
 		assets_->LoadTexture(MENU_BACKGROUND, MENU_BACKGROUND_FILEPATH);
+		assets_->LoadTexture(UPGRADE_BACKGROUND, UPGRADE_BACKGROUND_FILEPATH);
 		assets_->LoadTexture(SCOREBOARD_BACKGROUND, SCOREBOARD_BACKGROUND_FILEPATH);
 		assets_->LoadTexture(ASTEROID_SMALL, ASTEROID_SMALL_FILEPATH);
 		assets_->LoadTexture(ASTEROID, ASTEROID_FILEPATH);
@@ -114,7 +115,6 @@ namespace sis
 
 			currentTime = newTime;
 			accumulator += frameTime;
-
 			float time_left = level_->getLevelData().time - level_clock_.getElapsedTime().asSeconds() + timeOnPause;
 
 			while (accumulator >= frameRate_)
@@ -153,7 +153,7 @@ namespace sis
 		state_ = 0;
 		player_ = new Player();
 		object_manager_ = new ObjectManager(window_, assets_, player_);
-		hud_ = new HUD(window_, assets_, player_);
+		hud_ = new HUD(window_, assets_, player_, object_manager_->getSpaceShip());
 		player_->setName(menu_->inputNameScreen());
 		if (player_->getName() == "")
 			return false;

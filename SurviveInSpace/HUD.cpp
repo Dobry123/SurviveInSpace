@@ -2,11 +2,12 @@
 
 namespace sis
 {
-	HUD::HUD(sf::RenderWindow *window, AssetManager *assets, Player *player)
+	HUD::HUD(sf::RenderWindow *window, AssetManager *assets, Player *player, SpaceShip *spaceship)
 	{
 		window_ = window;
 		assets_ = assets;
 		player_ = player;
+		spaceship_ = spaceship;
 		text_.setFont(assets_->getFont(MENU_FONT));
 		text_.setCharacterSize(30);
 		sprite_edge_.setTexture(assets_->getTexture(HUD_EDGE));
@@ -43,6 +44,7 @@ namespace sis
 		text_.setFillColor(sf::Color::Yellow);
 		window_->draw(text_);
 
+		ss.str("");
 		ss << lvl_time_left;
 		text_.setString(ss.str());
 		text_.setPosition(sf::Vector2f(0, 1 * WINDOW_HEIGHT / 5));
@@ -82,6 +84,18 @@ namespace sis
 		ss << player_->getLifes();
 		text_.setString(ss.str());
 		text_.setPosition(sf::Vector2f(GAME_WIDTH_MAX + 20, 30));
+		text_.setFillColor(sf::Color::White);
+		window_->draw(text_);
+
+		text_.setString("Hp: ");
+		text_.setPosition(sf::Vector2f(GAME_WIDTH_MAX + 20, 1 * WINDOW_HEIGHT / 5 - 30));
+		text_.setFillColor(sf::Color::Yellow);
+		window_->draw(text_);
+
+		ss.str("");
+		ss << spaceship_->getHp();
+		text_.setString(ss.str());
+		text_.setPosition(sf::Vector2f(GAME_WIDTH_MAX + 20, 1 * WINDOW_HEIGHT / 5));
 		text_.setFillColor(sf::Color::White);
 		window_->draw(text_);
 	}

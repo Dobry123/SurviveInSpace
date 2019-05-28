@@ -18,6 +18,9 @@
 #define SCOREBOARD_BACKGROUND_FILEPATH "Data/scoreboard_background.jpg"
 #define SCOREBOARD_BACKGROUND "scoreboard_background"
 
+#define UPGRADE_BACKGROUND_FILEPATH "Data/upgrade_background.jpg"
+#define UPGRADE_BACKGROUND "upgrade_background"
+
 #define ASTEROID_FILEPATH "Data/rock.png"
 #define ASTEROID "asteroid_tex"
 
@@ -47,3 +50,4 @@
 
 #define HUD_BLACK_FILEPATH "Data/HUD_black.png"
 #define HUD_BLACK "HUD_black"
+
