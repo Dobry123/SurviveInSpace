@@ -40,6 +40,10 @@ namespace sis
 			pose_.y += dy;
 			sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 			distance_ += sqrtf(dx * dx + dy * dy);
+			if(pose_.x > GAME_WIDTH_MAX)
+				toDestroy_ = true;
+			if (pose_.x < GAME_WIDTH_MIN)
+				toDestroy_ = true;
 		}
 		else
 			toDestroy_ = true;

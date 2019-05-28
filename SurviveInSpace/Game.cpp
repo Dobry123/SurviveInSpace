@@ -34,8 +34,9 @@ namespace sis
 		assets_->LoadTexture(SHOT_TYPE_1, SHOT_TYPE_1_FILEPATH);
 		assets_->LoadTexture(EXPLOSION_1, EXPLOSION_1_FILEPATH);
 		assets_->LoadTexture(CRUISER, CRUISER_FILEPATH);
+		assets_->LoadTexture(HUD_EDGE, HUD_EDGE_FILEPATH);
+		assets_->LoadTexture(HUD_BLACK, HUD_BLACK_FILEPATH);
 		assets_->LoadFont(MENU_FONT, MENU_FONT_FILEPATH);
-
 	}
 
 	void Game::run(bool new_game)
@@ -126,7 +127,7 @@ namespace sis
 			// draw
 			window_->clear();
 			object_manager_->draw();
-			hud_->draw(time_left);
+			hud_->draw(time_left, level_->getCurrentLevel());
 			window_->display();
 
 			if (time_left <= 0)

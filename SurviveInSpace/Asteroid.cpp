@@ -55,24 +55,24 @@ namespace sis
 		pose_.y += dy;
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
 
-		if (pose_.x > WINDOW_WIDTH + 30)
+		if (pose_.x > GAME_WIDTH_MAX + 30)
 		{
-			sprite_.setPosition(sf::Vector2f(0, pose_.y));
-			pose_.x = -30;
+			sprite_.setPosition(sf::Vector2f(GAME_WIDTH_MIN - 30, pose_.y));
+			pose_.x = GAME_WIDTH_MIN - 30;
 		}
-		if (pose_.x < -30)
+		if (pose_.x < GAME_WIDTH_MIN -30)
 		{
-			sprite_.setPosition(sf::Vector2f(WINDOW_WIDTH, pose_.y));
-			pose_.x = WINDOW_WIDTH + 30;
+			sprite_.setPosition(sf::Vector2f(GAME_WIDTH_MAX + 30, pose_.y));
+			pose_.x = GAME_WIDTH_MAX + 30;
 		}
 		if (pose_.y < -30)
 		{
-			sprite_.setPosition(sf::Vector2f(pose_.x, WINDOW_HEIGHT));
-			pose_.y = WINDOW_HEIGHT + 30;
+			sprite_.setPosition(sf::Vector2f(pose_.x, GAME_HEIGHT));
+			pose_.y = GAME_HEIGHT + 30;
 		}
-		if (pose_.y > WINDOW_HEIGHT + 30)
+		if (pose_.y > GAME_HEIGHT + 30)
 		{
-			sprite_.setPosition(sf::Vector2f(pose_.x, 0));
+			sprite_.setPosition(sf::Vector2f(pose_.x, -30));
 			pose_.y = -30;
 		}
 	}

@@ -15,12 +15,14 @@ namespace sis
 	{
 	public:
 		HUD(sf::RenderWindow *window, AssetManager *assets, Player *player);
-		void draw(float lvl_time_left);
+		void draw(float lvl_time_left, int lvl);
 	private:
 		sf::RenderWindow *window_;
 		AssetManager *assets_;
 		Player *player_;
 		sf::Text text_;
+		sf::Sprite sprite_edge_;
+		sf::Sprite sprite_black_;
 	};
 }
 

@@ -62,16 +62,16 @@ namespace sis
 		else
 			pose_.x += speed_ * dt;
 
-		if (pose_.x > WINDOW_WIDTH + 30)
+		if (pose_.x > GAME_WIDTH_MAX + 30)
 		{
-			sprite_.setPosition(sf::Vector2f(-30, pose_.y));
-			pose_.x = -30;
+			sprite_.setPosition(sf::Vector2f(GAME_WIDTH_MIN -30, pose_.y));
+			pose_.x = GAME_WIDTH_MIN -30;
 		}
 
-		if (pose_.x < -30)
+		if (pose_.x < GAME_WIDTH_MIN -30)
 		{
-			sprite_.setPosition(sf::Vector2f(WINDOW_WIDTH + 30, pose_.y));
-			pose_.x = WINDOW_WIDTH + 30;
+			sprite_.setPosition(sf::Vector2f(GAME_WIDTH_MAX + 30, pose_.y));
+			pose_.x = GAME_WIDTH_MAX + 30;
 		}
 
 		sprite_.setPosition(sf::Vector2f(pose_.x, pose_.y));
