@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Asteroid.cpp" />
+    <ClCompile Include="BoarderEnemy.cpp" />
     <ClCompile Include="CruiserEnemy.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="BoarderEnemy.h" />
     <ClInclude Include="CruiserEnemy.h" />
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="Explosion.h" />

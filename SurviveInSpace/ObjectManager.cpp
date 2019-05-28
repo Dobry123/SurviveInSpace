@@ -10,6 +10,7 @@ namespace sis
 
 		spaceship_ = new SpaceShip(window_, assets_);
 		cruisers_amount_ = 0;
+		boarders_amount_ = 0;
 	}
 
 	ObjectManager::~ObjectManager()
@@ -52,6 +53,17 @@ namespace sis
 			{
 				enemies_.push_back(new CruiserEnemy(window_, assets_, lvl_data.cruiser_difficult));
 				++cruisers_amount_;
+			}
+		}
+
+		// spawn boarders
+		if (boarders_amount_ < lvl_data.boarder)
+		{
+			int spawn = lvl_data.boarder - boarders_amount_;
+			for (int i = 0; i < spawn; ++i)
+			{
+				enemies_.push_back(new BoarderEnemy(window_, assets_, lvl_data.boarder_difficult));
+				++boarders_amount_;
 			}
 		}
 
@@ -272,6 +284,8 @@ namespace sis
 
 						if (enemies_[j]->getType() == 1)
 							--cruisers_amount_;
+						else if(enemies_[j]->getType() == 2)
+							--boarders_amount_;
 						delete enemies_[j];
 						enemies_.erase(enemies_.begin() + j);
 						if (j > -1)
@@ -300,6 +314,22 @@ namespace sis
 		{
 			delete spaceship_shots_[i];
 			spaceship_shots_.erase(spaceship_shots_.begin() + i);
+			if (i > -1)
+				--i;
+		}
+
+		for (int i = 0; i < enemies_.size(); ++i)
+		{
+			delete enemies_[i];
+			enemies_.erase(enemies_.begin() + i);
+			if (i > -1)
+				--i;
+		}
+
+		for (int i = 0; i < enemy_shots_.size(); ++i)
+		{
+			delete enemy_shots_[i];
+			enemy_shots_.erase(enemy_shots_.begin() + i);
 			if (i > -1)
 				--i;
 		}

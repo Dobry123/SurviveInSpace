@@ -11,6 +11,8 @@ namespace sis
 		int asteroid_difficult;
 		int cruiser;
 		int cruiser_difficult;
+		int boarder;
+		int boarder_difficult;
 	};
 
 	class Level

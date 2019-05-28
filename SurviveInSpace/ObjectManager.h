@@ -10,6 +10,7 @@
 #include "Explosion.h"
 #include "Level.h"
 #include "CruiserEnemy.h"
+#include "BoarderEnemy.h"
 
 namespace sis
 {
@@ -34,6 +35,7 @@ namespace sis
 		std::vector<Explosion *> explosions_;
 		SpaceShip *spaceship_;
 		int cruisers_amount_;
+		int boarders_amount_;
 		
 		void checkCollisions();
 		void processShots(float dt);

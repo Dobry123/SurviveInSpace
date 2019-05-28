@@ -45,9 +45,11 @@
 #define CRUISER_FILEPATH "Data/cruiser.png"
 #define CRUISER "cruiser_tex"
 
+#define BOARDER_FILEPATH "Data/boarder.png"
+#define BOARDER "boarder_tex"
+
 #define HUD_EDGE_FILEPATH "Data/HUD_edge.png"
 #define HUD_EDGE "HUD_edge"
 
 #define HUD_BLACK_FILEPATH "Data/HUD_black.png"
 #define HUD_BLACK "HUD_black"
-
