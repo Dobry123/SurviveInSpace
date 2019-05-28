@@ -36,6 +36,7 @@ namespace sis
 		void handleInput();
 		void draw();
 		void showScoreboard();
+		void showAbout();
 	};
 }
 

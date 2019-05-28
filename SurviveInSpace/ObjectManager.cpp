@@ -308,8 +308,8 @@ namespace sis
 						if (j > -1)
 							--j;
 
-						player_->addScore(10);
-						player_->addMoney(5);
+						player_->addScore(20);
+						player_->addMoney(10);
 					}
 					break;
 				}

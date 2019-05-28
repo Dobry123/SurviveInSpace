@@ -79,7 +79,13 @@ namespace sis
 						updateScreen->process();
 						delete updateScreen;
 
-						level_->levelUp();
+						if(level_->getCurrentLevel() != 7)
+							level_->levelUp();
+						else
+						{
+							run();
+							return;
+						}
 						break;
 					}
 				}

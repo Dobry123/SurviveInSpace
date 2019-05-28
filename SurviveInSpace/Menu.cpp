@@ -9,7 +9,7 @@ namespace sis
 		choice_selected_(false)
 	{
 		menuTexts_[0] = "New Game";
-		menuTexts_[1] = "Settings";
+		menuTexts_[1] = "About";
 		menuTexts_[2] = "Scoreboard";
 		menuTexts_[3] = "Exit";
 
@@ -92,6 +92,9 @@ namespace sis
 		// delay
 		clock_.restart();
 		while (clock_.getElapsedTime().asSeconds() < delayTime_) {}
+
+		if (current_choice_ == 1)
+			showAbout();
 
 		if (current_choice_ == 2)
 			showScoreboard();
@@ -182,5 +185,24 @@ namespace sis
 					return "";
 			}
 		}
+	}
+
+	void Menu::showAbout()
+	{
+		window_->clear();
+		window_->draw(scoreboard_backgroundSprite_);
+
+		text_.setCharacterSize(40);
+		text_.setString("Game created by Mateusz Szczygielski");
+		text_.setPosition(sf::Vector2f(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 20));
+		window_->draw(text_);
+
+		text_.setString("ESC TO BACK");
+		text_.setPosition(sf::Vector2f(10, WINDOW_HEIGHT - 40));
+		window_->draw(text_);
+
+		window_->display();
+		while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {}
+		process();
 	}
 }

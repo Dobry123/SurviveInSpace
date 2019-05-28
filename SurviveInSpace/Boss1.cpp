@@ -11,7 +11,7 @@ namespace sis
 		std::uniform_int_distribution<int> intDistHeight(1, WINDOW_HEIGHT / 2);
 		std::uniform_real_distribution<float> floatDist0_1(0, 1);
 
-		hp_ = 2000 * difficult;
+		hp_ = 10000 * difficult;
 		pose_.x = WINDOW_WIDTH / 2;
 		pose_.y = 100;
 		pose_.rotation = 180;
